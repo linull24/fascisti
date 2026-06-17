@@ -1,13 +1,12 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fascisti Quiz</title>
-<meta name="description" content="一个历史人物风格匹配小测试。" />
+<meta name="description" content="历史人物风格匹配小测试。">
 <style>
-:root{--bg:#f4efe7;--paper:#fffaf1;--ink:#211b17;--muted:#75685e;--line:#d8c8b8;--red:#8b1e1e;--gold:#b28a43;--shadow:0 18px 48px rgba(51,32,18,.16)}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#fff7e8 0,#efe2d1 52%,#d8c3ac 100%);color:var(--ink);font-family:ui-serif,Georgia,"Noto Serif SC","Songti SC",serif;line-height:1.58}.wrap{max-width:980px;margin:0 auto;padding:32px 18px 60px}.card{background:rgba(255,250,241,.94);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:24px;padding:28px}.hero{text-align:center;padding:54px 24px}.eyebrow{letter-spacing:.18em;text-transform:uppercase;color:var(--red);font-size:13px;font-weight:700}.title{font-size:clamp(40px,8vw,86px);line-height:.95;margin:18px 0 12px;font-weight:900}.subtitle{max-width:680px;margin:0 auto;color:var(--muted);font-size:18px}.btn{appearance:none;border:0;border-radius:999px;background:var(--ink);color:#fff;padding:13px 22px;font-size:16px;cursor:pointer;margin-top:24px}.btn.secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}.progress{height:8px;background:#e7d8c8;border-radius:999px;overflow:hidden;margin:18px 0 24px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--gold));transition:.25s}.qtop{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:14px}.q{font-size:25px;margin:14px 0 18px}.opts{display:grid;gap:12px}.opt{width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;font:inherit;color:var(--ink);cursor:pointer;transition:.15s}.opt:hover{transform:translateY(-1px);border-color:#b79a7f;background:#fffdf7}.result{display:grid;grid-template-columns:minmax(220px,330px) 1fr;gap:26px;align-items:start}.portrait{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:20px;border:1px solid var(--line);background:#eadccc;box-shadow:0 14px 28px rgba(0,0,0,.16)}.name{font-size:42px;line-height:1.05;margin:0}.meta{color:var(--red);font-weight:700;margin:8px 0 10px}.desc{font-size:18px}.pillrow{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.pill{border:1px solid var(--line);border-radius:999px;padding:5px 10px;color:var(--muted);font-size:13px;background:#fff}.scores{margin-top:18px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:14px}.hidden{display:none}.foot{margin-top:16px;color:var(--muted);font-size:13px;text-align:center}@media(max-width:760px){.result{grid-template-columns:1fr}.hero{padding:36px 18px}.card{padding:20px}.name{font-size:34px}.q{font-size:22px}}
+:root{--bg:#efe2d1;--paper:#fffaf1;--ink:#211b17;--muted:#74675d;--line:#d8c8b8;--red:#8b1e1e;--gold:#b28a43;--shadow:0 18px 48px rgba(51,32,18,.16)}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#fff7e8 0,#efe2d1 55%,#d8c3ac 100%);color:var(--ink);font-family:ui-serif,Georgia,"Noto Serif SC","Songti SC",serif;line-height:1.58}.wrap{max-width:980px;margin:0 auto;padding:32px 18px 60px}.card{background:rgba(255,250,241,.95);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:24px;padding:28px}.hero{text-align:center;padding:54px 24px}.eyebrow{letter-spacing:.18em;text-transform:uppercase;color:var(--red);font-size:13px;font-weight:700}.title{font-size:clamp(40px,8vw,84px);line-height:.95;margin:18px 0 12px;font-weight:900}.subtitle{max-width:680px;margin:0 auto;color:var(--muted);font-size:18px}.btn{appearance:none;border:0;border-radius:999px;background:var(--ink);color:#fff;padding:13px 22px;font-size:16px;cursor:pointer;margin-top:24px}.btn.secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}.progress{height:8px;background:#e7d8c8;border-radius:999px;overflow:hidden;margin:18px 0 24px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--gold));transition:.25s}.qtop{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:14px}.q{font-size:25px;margin:14px 0 18px}.opts{display:grid;gap:12px}.opt{width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;font:inherit;color:var(--ink);cursor:pointer;transition:.15s}.opt:hover{transform:translateY(-1px);border-color:#b79a7f;background:#fffdf7}.result{display:grid;grid-template-columns:minmax(220px,330px) 1fr;gap:26px;align-items:start}.portrait{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:20px;border:1px solid var(--line);background:#eadccc;box-shadow:0 14px 28px rgba(0,0,0,.16)}.name{font-size:42px;line-height:1.05;margin:0}.meta{color:var(--red);font-weight:700;margin:8px 0 10px}.desc{font-size:18px}.pillrow{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.pill{border:1px solid var(--line);border-radius:999px;padding:5px 10px;color:var(--muted);font-size:13px;background:#fff}.scores{margin-top:18px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:14px}.hidden{display:none}.foot{margin-top:16px;color:var(--muted);font-size:13px;text-align:center}.err{white-space:pre-wrap;background:#fff3f3;border:1px solid #d9a2a2;border-radius:14px;padding:12px;color:#7a1111;margin-top:14px;display:none}@media(max-width:760px){.result{grid-template-columns:1fr}.hero{padding:36px 18px}.card{padding:20px}.name{font-size:34px}.q{font-size:22px}}
 </style>
 </head>
 <body>
@@ -16,11 +15,12 @@
   <div class="eyebrow">historical style matcher</div>
   <h1 class="title">Fascisti Quiz</h1>
   <p class="subtitle">不是立场测试，而是把阅读习惯、组织偏好、审美判断和问题理解方式，映射到一组历史人物风格卡。</p>
-  <button class="btn" id="startBtn">开始测试</button>
-  <p class="foot">题目已尽量淡化戏剧化场景，偏向观点与处理方式。</p>
+  <button class="btn" id="startBtn" type="button">开始测试</button>
+  <div id="err" class="err"></div>
+  <p class="foot">题目偏向观点与处理方式，不做现实政治建议。</p>
 </section>
 <section id="quiz" class="card hidden">
-  <div class="qtop"><span id="step"></span><span id="hint">选择最接近的一项</span></div>
+  <div class="qtop"><span id="step"></span><span>选择最接近的一项</span></div>
   <div class="progress"><div class="bar" id="bar"></div></div>
   <h2 class="q" id="qText"></h2>
   <div class="opts" id="opts"></div>
@@ -35,14 +35,17 @@
       <p class="desc" id="rDesc"></p>
       <div class="pillrow" id="rTags"></div>
       <div class="scores" id="rScores"></div>
-      <button class="btn" id="againBtn">重新测试</button>
-      <button class="btn secondary" id="copyBtn">复制结果</button>
+      <button class="btn" id="againBtn" type="button">重新测试</button>
+      <button class="btn secondary" id="copyBtn" type="button">复制结果</button>
     </div>
   </div>
 </section>
 </div>
 <script>
-const IMAGES={
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const IMAGES = {
   mussolini:'https://upload.wikimedia.org/wikipedia/commons/3/3b/Benito_Mussolini_portrait_as_dictator.jpg',
   dannunzio:'https://upload.wikimedia.org/wikipedia/commons/c/c9/Gabriele_D%27Annunzio_1922.jpg',
   marinetti:'https://upload.wikimedia.org/wikipedia/commons/4/4c/Filippo_Tommaso_Marinetti.jpg',
@@ -53,7 +56,6 @@ const IMAGES={
   franco:'https://upload.wikimedia.org/wikipedia/commons/9/93/Francisco_Franco_1930.jpg',
   joseantonio:'https://upload.wikimedia.org/wikipedia/commons/5/59/Jose_Antonio_Primo_de_Rivera_1934.jpg',
   himmler:'https://upload.wikimedia.org/wikipedia/commons/5/5e/Bundesarchiv_Bild_183-S72707%2C_Heinrich_Himmler.jpg',
-  salgado:'https://upload.wikimedia.org/wikipedia/commons/9/92/Plinio_Salgado.tif',
   codreanu:'https://upload.wikimedia.org/wikipedia/commons/6/63/Corneliu_Zelea_Codreanu.jpg',
   ishiwara:'https://upload.wikimedia.org/wikipedia/commons/9/97/Ishiwara_Kanji.jpg',
   itagaki:'https://upload.wikimedia.org/wikipedia/commons/d/dc/Seishiro_Itagaki.jpg',
@@ -78,74 +80,113 @@ const IMAGES={
   dugin:'https://upload.wikimedia.org/wikipedia/commons/e/e7/Aleksandr_Dugin_in_2018.jpg',
   letov:'https://upload.wikimedia.org/wikipedia/commons/5/5d/Yegor_Letov_2000.jpg',
   jordan:'https://upload.wikimedia.org/wikipedia/commons/3/35/Pascual_Jordan_1920s.jpg',
-  teichmuller:'https://alchetron.com/cdn/robert-teichmller-6faed34a-b644-4a09-845d-0a08c80004c-resize-750.jpg',
-  ba eumler:''
+  teichmuller:'https://alchetron.com/cdn/robert-teichmller-6faed34a-b644-4a09-845d-0a08c80004c-resize-750.jpg'
 };
-const C=[
- {id:'mussolini',name:'贝尼托·墨索里尼',meta:'报纸 · 账本 · 舞台',tags:['传播','机会判断','组织'],v:{newspaper:3,money:3,perform:2,org:2,prag:2},desc:'你更像会把想法转成刊物、账号、预算和对外口径的人。相比纯理论，你更关心一件事怎样被看见、怎样被推进。'},
- {id:'dannunzio',name:'加布里埃莱·邓南遮',meta:'审美 · 仪式 · 飞行',tags:['形式感','诗性','公共呈现'],v:{aesth:3,ritual:3,perform:3,air:2,poetry:2},desc:'你重视形式、气氛和整体观感。即使资源有限，也会想让一个活动具有完整的呈现方式。'},
- {id:'marinetti',name:'马里内蒂',meta:'速度 · 排版 · 未来主义',tags:['动态视觉','速度感','反传统'],v:{speed:3,noise:2,futur:3,aesth:2,trad:-2},desc:'你偏好强烈、动态、带速度感的表达。你不太愿意让文本和视觉停在稳定、工整、传统的位置。'},
- {id:'nietzsche',name:'尼采',meta:'谱系 · 价值 · 独行',tags:['价值重估','风格','孤独'],v:{brain:3,island:2,text:2,aesth:1,order:-1},desc:'你会把许多争论追溯到价值来源和心理结构，而不是停在表面的是非判断。'},
- {id:'spengler',name:'斯宾格勒',meta:'文明 · 周期 · 黄昏',tags:['历史周期','文明论','宏观'],v:{civilization:3,doom:3,book:2,brain:2,map:1},desc:'你容易把日常变化放入更大的历史周期中理解，对短期修补的耐心有限。'},
- {id:'schmitt',name:'卡尔·施米特',meta:'法学 · 例外 · 决断',tags:['最终解释权','制度边界','冷判断'],v:{law:3,decision:3,ice:2,order:2},desc:'当意见混乱时，你首先关心谁拥有最终解释权，以及边界由谁来划定。'},
- {id:'evola',name:'埃沃拉',meta:'传统 · 山 · 秘教',tags:['反现代','冷传统','书斋'],v:{trad:3,mystic:3,island:2,ice:2,org:-1},desc:'你不急于参与热闹的组织活动，更愿意追溯传统、来源和精神层级。'},
- {id:'franco',name:'弗朗哥',meta:'秩序 · 稳定 · 守成',tags:['保守','治理','耐心'],v:{order:3,ice:2,admin:2,trad:2,perform:-1},desc:'你的倾向是压低波动、维持结构、等待对手犯错。你不迷恋表达，重视可持续的控制。'},
- {id:'joseantonio',name:'何塞·安东尼奥',meta:'青年 · 演说 · 贵族气',tags:['青年','表达','体面'],v:{youth:2,speech:3,aesth:2,law:1,org:1},desc:'你重视表达的清洁度与精神姿态，倾向把组织问题先转化为一套体面的语言。'},
- {id:'himmler',name:'希姆莱',meta:'档案 · 谱系 · 组织仪式',tags:['档案','层级','固定规则'],v:{archive:3,mystic:2,order:3,ritual:2,org:2},desc:'你整理资料时会自然形成层级、编号、符号和固定归档规则。'},
- {id:'codreanu',name:'科德里亚努',meta:'青年 · 宗教感 · 小组承诺',tags:['纪律','共同体','承诺'],v:{youth:3,ritual:2,religion:2,group:2,doom:1},desc:'你关注小组织内部的承诺、纪律和共同体密度，不满足于松散合作。'},
- {id:'ishiwar a',name:'石原莞尔',meta:'地图 · 战略 · 终局',tags:['战略','地缘','大局'],v:{map:3,strategy:3,religion:1,hand:2,mystic:1},desc:'你画地图不是为了找路，而是为了理解眼前事务通向怎样的长期结构。'},
- {id:'itagaki',name:'板垣征四郎',meta:'军务 · 执行 · 现场',tags:['军略','执行','组织'],v:{hand:3,org:2,strategy:2,ice:1,admin:1},desc:'你偏向把复杂判断落到具体执行链上，不喜欢只停在解释层面。'},
- {id:'kita',name:'北一辉',meta:'蓝图 · 改造 · 青年',tags:['纲领','理论','改革'],v:{theory:3,youth:2,text:2,volc:2,org:1},desc:'你会把不满整理成系统蓝图，试图给分散情绪一个明确结构。'},
- {id:'okawa',name:'大川周明',meta:'泛亚 · 宗教 · 书斋',tags:['泛亚','宗教','知识网络'],v:{religion:2,book:2,asia:3,brain:2,mystic:1},desc:'你更倾向从文明、宗教和区域结构理解政治，而不是只看一国一时。'},
- {id:'daijitao',name:'戴季陶',meta:'正统解释 · 文本 · 教育',tags:['正统','解释权','文本'],v:{orthodoxy:3,text:3,pedagogy:2,religion:1,order:2},desc:'你最怕概念被随意解释，因此会主动写出标准读法和解释框架。'},
- {id:'hezhonghan',name:'贺衷寒',meta:'青年政训 · 纪律 · 干部',tags:['青年','训练','纪律'],v:{youth:3,org:3,discipline:3,pedagogy:2},desc:'你认为组织初期最需要稳定学习、分工、纪律和负责人机制。'},
- {id:'liujianqun',name:'刘健群',meta:'小册子 · 命名 · 组织想象',tags:['小册子','命名','传播'],v:{newspaper:2,youth:2,org:2,symbol:2,text:2},desc:'你不一定亲自站到台前，但擅长把模糊感觉变成名称、格式和可传播文本。'},
- {id:'kangze',name:'康泽',meta:'训练营 · 基层 · 动员',tags:['训练','筛选','任务'],v:{training:3,org:3,hand:2,discipline:3},desc:'相比开放讨论，你更重视成员筛选、训练和任务分配。'},
- {id:'daili',name:'戴笠',meta:'暗线 · 信息 · 关系',tags:['影子网络','信息分布','保密'],v:{shadow:3,archive:2,network:2,ice:2,org:1},desc:'你不一定发言最多，但会默默掌握关系、渠道和信息分布。'},
- {id:'chenlifu',name:'陈立夫',meta:'党务 · 人事 · 教育系统',tags:['行政','人事','网络'],v:{admin:3,org:3,network:3,archive:1,order:2},desc:'你关心谁负责报名、谁管名单、谁审批、谁培训，以及组织怎样分层运转。'},
- {id:'kangsheng',name:'康生',meta:'异轨彩蛋 · 档案 · 暗线',tags:['档案','暗线','稳定性'],v:{archive:3,shadow:3,loyalty:2,ice:2},desc:'进入新组织时，你会优先观察人员稳定性、信息流向和实际执行能力。'},
- {id:'mishima',name:'三岛由纪夫',meta:'文学 · 身体 · 自我要求',tags:['身体管理','文学','形式'],v:{body:3,aesth:2,ritual:2,doom:2,island:1},desc:'你倾向把写作、身体管理和个人形象放进同一套自我要求里。'},
- {id:'pound',name:'埃兹拉·庞德',meta:'诗 · 货币 · 碎片',tags:['文学','经济','引用'],v:{literature:3,money:2,fragment:3,archive:2,book:2},desc:'你容易把文学、经济和文明问题放进同一套解释框架。'},
- {id:'sorel',name:'乔治·索雷尔',meta:'神话 · 工团 · 行动',tags:['共享叙事','行动理论','工团'],v:{myth:3,strike:3,theory:2,labor:2,law:-2},desc:'你关心一种叙事能否形成持续行动，而不是只停留在政策细节。'},
- {id:'valois',name:'乔治·瓦卢瓦',meta:'工团 · 刊物 · 组织创业',tags:['工团','组织草案','刊物'],v:{syndical:3,newspaper:2,org:2,labor:2,failure:1},desc:'你擅长把散乱的不满变成组织草案、刊物和基本立场。'},
- {id:'gregor',name:'格雷戈尔·施特拉塞',meta:'基层网络 · 组织机器',tags:['基层','网络','反资本'],v:{org:3,labor:2,antiCapital:2,network:3,prag:2},desc:'你倾向在既有组织内部经营基层、人事和地方网络。'},
- {id:'otto',name:'奥托·施特拉塞',meta:'分裂 · 小册子 · 路线洁癖',tags:['分歧','出走','小册子'],v:{antiCapital:3,pamphlet:3,split:3,exile:2,newspaper:2},desc:'你对路线变味很敏感，倾向另写文本、重申分歧并重新组织。'},
- {id:'niekisch',name:'恩斯特·尼基施',meta:'民族布尔什维克 · 反西方',tags:['冷书斋','反西方','地图'],v:{nationalBolshevik:3,antiWest:3,book:2,doom:2,map:2,ice:2},desc:'你对自由主义、资产阶级和西方现代性都有冷静的怀疑。'},
- {id:'yockey',name:'Francis Parker Yockey',meta:'战后地下 · 斯宾格勒二创',tags:['厚书','流亡','地下'],v:{spengler:3,underground:2,exile:2,book:3,doom:3},desc:'你偏好不易读、但能提供完整世界观的理论文本。'},
- {id:'limonov',name:'爱德华·利莫诺夫',meta:'地下小报 · 流亡 · 自传',tags:['地下','小报','流亡'],v:{underground:3,newspaper:3,exile:3,literature:3,order:-2},desc:'你更关注边缘共同体、非正式网络和强烈的自我叙事。'},
- {id:'dugin',name:'亚历山大·杜金',meta:'欧亚 · 地图 · 神秘地缘',tags:['地缘','欧亚','黑色书斋'],v:{map:3,eurasia:3,mystic:3,book:2,antiLiberal:2},desc:'你倾向从地理空间、长期结构和文明边界理解政治变化。'},
- {id:'letov',name:'叶戈尔·列托夫',meta:'噪音 · 朋克 · 反政治',tags:['地下音乐','立场审美','孤岛'],v:{noise:3,punk:3,underground:2,island:2,law:-3},desc:'你不喜欢直接表态，但审美选择本身带有很强的立场感。'},
- {id:'jordan',name:'Pascual Jordan',meta:'量子 · 随机 · 反唯物',tags:['物理','随机','书斋'],v:{physics:3,random:3,brain:3,antiMatter:2,shadow:1},desc:'你倾向把世界拆成概率、结构和可观测量，而不是粗糙地谈物质与观念。'},
- {id:'teichmuller',name:'Oswald Teichmüller',meta:'数学 · 形变 · 地图',tags:['数学','映射','冷感'],v:{math:3,map:2,ice:2,form:3,perform:-2},desc:'你看地图不是看距离，而是看它在保持结构时还能怎样变形。'}
+const C = [
+ c('mussolini','贝尼托·墨索里尼','报纸 · 账本 · 舞台',['传播','机会判断','组织'],{newspaper:3,money:3,perform:2,org:2,prag:2},'你更像会把想法转成刊物、账号、预算和对外口径的人。相比纯理论，你更关心一件事怎样被看见、怎样被推进。'),
+ c('dannunzio','加布里埃莱·邓南遮','审美 · 仪式 · 飞行',['形式感','诗性','公共呈现'],{aesth:3,ritual:3,perform:3,air:2,poetry:2},'你重视形式、气氛和整体观感。即使资源有限，也会想让一个活动具有完整的呈现方式。'),
+ c('marinetti','马里内蒂','速度 · 排版 · 未来主义',['动态视觉','速度感','反传统'],{speed:3,noise:2,futur:3,aesth:2,trad:-2},'你偏好强烈、动态、带速度感的表达。你不太愿意让文本和视觉停在稳定、工整、传统的位置。'),
+ c('nietzsche','尼采','谱系 · 价值 · 独行',['价值重估','风格','孤独'],{brain:3,island:2,text:2,aesth:1,order:-1},'你会把许多争论追溯到价值来源和心理结构，而不是停在表面的是非判断。'),
+ c('spengler','斯宾格勒','文明 · 周期 · 黄昏',['历史周期','文明论','宏观'],{civilization:3,doom:3,book:2,brain:2,map:1},'你容易把日常变化放入更大的历史周期中理解，对短期修补的耐心有限。'),
+ c('schmitt','卡尔·施米特','法学 · 例外 · 决断',['最终解释权','制度边界','冷判断'],{law:3,decision:3,ice:2,order:2},'当意见混乱时，你首先关心谁拥有最终解释权，以及边界由谁来划定。'),
+ c('evola','埃沃拉','传统 · 山 · 秘教',['反现代','冷传统','书斋'],{trad:3,mystic:3,island:2,ice:2,org:-1},'你不急于参与热闹的组织活动，更愿意追溯传统、来源和精神层级。'),
+ c('franco','弗朗哥','秩序 · 稳定 · 守成',['保守','治理','耐心'],{order:3,ice:2,admin:2,trad:2,perform:-1},'你的倾向是压低波动、维持结构、等待对手犯错。你不迷恋表达，重视可持续的控制。'),
+ c('joseantonio','何塞·安东尼奥','青年 · 演说 · 贵族气',['青年','表达','体面'],{youth:2,speech:3,aesth:2,law:1,org:1},'你重视表达的清洁度与精神姿态，倾向把组织问题先转化为一套体面的语言。'),
+ c('himmler','希姆莱','档案 · 谱系 · 组织仪式',['档案','层级','固定规则'],{archive:3,mystic:2,order:3,ritual:2,org:2},'你整理资料时会自然形成层级、编号、符号和固定归档规则。'),
+ c('codreanu','科德里亚努','青年 · 宗教感 · 小组承诺',['纪律','共同体','承诺'],{youth:3,ritual:2,religion:2,group:2,doom:1},'你关注小组织内部的承诺、纪律和共同体密度，不满足于松散合作。'),
+ c('ishiwara','石原莞尔','地图 · 战略 · 终局',['战略','地缘','大局'],{map:3,strategy:3,religion:1,hand:2,mystic:1},'你画地图不是为了找路，而是为了理解眼前事务通向怎样的长期结构。'),
+ c('itagaki','板垣征四郎','军务 · 执行 · 现场',['军略','执行','组织'],{hand:3,org:2,strategy:2,ice:1,admin:1},'你偏向把复杂判断落到具体执行链上，不喜欢只停在解释层面。'),
+ c('kita','北一辉','蓝图 · 改造 · 青年',['纲领','理论','改革'],{theory:3,youth:2,text:2,volc:2,org:1},'你会把不满整理成系统蓝图，试图给分散情绪一个明确结构。'),
+ c('okawa','大川周明','泛亚 · 宗教 · 书斋',['泛亚','宗教','知识网络'],{religion:2,book:2,asia:3,brain:2,mystic:1},'你更倾向从文明、宗教和区域结构理解政治，而不是只看一国一时。'),
+ c('daijitao','戴季陶','正统解释 · 文本 · 教育',['正统','解释权','文本'],{orthodoxy:3,text:3,pedagogy:2,religion:1,order:2},'你最怕概念被随意解释，因此会主动写出标准读法和解释框架。'),
+ c('hezhonghan','贺衷寒','青年政训 · 纪律 · 干部',['青年','训练','纪律'],{youth:3,org:3,discipline:3,pedagogy:2},'你认为组织初期最需要稳定学习、分工、纪律和负责人机制。'),
+ c('liujianqun','刘健群','小册子 · 命名 · 组织想象',['小册子','命名','传播'],{newspaper:2,youth:2,org:2,symbol:2,text:2},'你不一定亲自站到台前，但擅长把模糊感觉变成名称、格式和可传播文本。'),
+ c('kangze','康泽','训练营 · 基层 · 动员',['训练','筛选','任务'],{training:3,org:3,hand:2,discipline:3},'相比开放讨论，你更重视成员筛选、训练和任务分配。'),
+ c('daili','戴笠','暗线 · 信息 · 关系',['影子网络','信息分布','保密'],{shadow:3,archive:2,network:2,ice:2,org:1},'你不一定发言最多，但会默默掌握关系、渠道和信息分布。'),
+ c('chenlifu','陈立夫','党务 · 人事 · 教育系统',['行政','人事','网络'],{admin:3,org:3,network:3,archive:1,order:2},'你关心谁负责报名、谁管名单、谁审批、谁培训，以及组织怎样分层运转。'),
+ c('kangsheng','康生','异轨彩蛋 · 档案 · 暗线',['档案','暗线','稳定性'],{archive:3,shadow:3,loyalty:2,ice:2},'进入新组织时，你会优先观察人员稳定性、信息流向和实际执行能力。'),
+ c('mishima','三岛由纪夫','文学 · 身体 · 自我要求',['身体管理','文学','形式'],{body:3,aesth:2,ritual:2,doom:2,island:1},'你倾向把写作、身体管理和个人形象放进同一套自我要求里。'),
+ c('pound','埃兹拉·庞德','诗 · 货币 · 碎片',['文学','经济','引用'],{literature:3,money:2,fragment:3,archive:2,book:2},'你容易把文学、经济和文明问题放进同一套解释框架。'),
+ c('sorel','乔治·索雷尔','神话 · 工团 · 行动',['共享叙事','行动理论','工团'],{myth:3,strike:3,theory:2,labor:2,law:-2},'你关心一种叙事能否形成持续行动，而不是只停留在政策细节。'),
+ c('valois','乔治·瓦卢瓦','工团 · 刊物 · 组织创业',['工团','组织草案','刊物'],{syndical:3,newspaper:2,org:2,labor:2,failure:1},'你擅长把散乱的不满变成组织草案、刊物和基本立场。'),
+ c('gregor','格雷戈尔·施特拉塞','基层网络 · 组织机器',['基层','网络','反资本'],{org:3,labor:2,antiCapital:2,network:3,prag:2},'你倾向在既有组织内部经营基层、人事和地方网络。'),
+ c('otto','奥托·施特拉塞','分裂 · 小册子 · 路线洁癖',['分歧','出走','小册子'],{antiCapital:3,pamphlet:3,split:3,exile:2,newspaper:2},'你对路线变味很敏感，倾向另写文本、重申分歧并重新组织。'),
+ c('niekisch','恩斯特·尼基施','民族布尔什维克 · 反西方',['冷书斋','反西方','地图'],{nationalBolshevik:3,antiWest:3,book:2,doom:2,map:2,ice:2},'你对自由主义、资产阶级和西方现代性都有冷静的怀疑。'),
+ c('yockey','Francis Parker Yockey','战后地下 · 斯宾格勒二创',['厚书','流亡','地下'],{spengler:3,underground:2,exile:2,book:3,doom:3},'你偏好不易读、但能提供完整世界观的理论文本。'),
+ c('limonov','爱德华·利莫诺夫','地下小报 · 流亡 · 自传',['地下','小报','流亡'],{underground:3,newspaper:3,exile:3,literature:3,order:-2},'你更关注边缘共同体、非正式网络和强烈的自我叙事。'),
+ c('dugin','亚历山大·杜金','欧亚 · 地图 · 神秘地缘',['地缘','欧亚','黑色书斋'],{map:3,eurasia:3,mystic:3,book:2,antiLiberal:2},'你倾向从地理空间、长期结构和文明边界理解政治变化。'),
+ c('letov','叶戈尔·列托夫','噪音 · 朋克 · 反政治',['地下音乐','立场审美','孤岛'],{noise:3,punk:3,underground:2,island:2,law:-3},'你不喜欢直接表态，但审美选择本身带有很强的立场感。'),
+ c('jordan','Pascual Jordan','量子 · 随机 · 反唯物',['物理','随机','书斋'],{physics:3,random:3,brain:3,antiMatter:2,shadow:1},'你倾向把世界拆成概率、结构和可观测量，而不是粗糙地谈物质与观念。'),
+ c('teichmuller','Oswald Teichmüller','数学 · 形变 · 地图',['数学','映射','冷感'],{math:3,map:2,ice:2,form:3,perform:-2},'你看地图不是看距离，而是看它在保持结构时还能怎样变形。')
 ];
-const Q=[
- {q:'你怎么看待“群众”这个概念：',o:[['它需要某种共享叙事，否则很难形成持续行动',{myth:1,strike:1,sorel:1}],['它首先依赖基层网络、地方节点和长期组织',{org:1,network:1,gregor:1}],['它需要稳定训练和分工，否则热情难以维持',{discipline:1,youth:1,kangze:1}],['相比宏大概念，我更关注小范围共同体的实际连接',{underground:1,exile:1,limonov:1}]]},
- {q:'如果你要办一个新刊物，最重要的是：',o:[['刊名要有识别度，最好能让人一眼记住',{newspaper:1,symbol:1,liujianqun:1}],['第一期要先说明自己的分歧和基本立场',{split:1,pamphlet:1,otto:1}],['不必追求大众化，但要有清楚的理论密度',{book:1,spengler:1,yockey:1}],['文本不应只停留在表达，还要影响人的判断和行动',{myth:1,strike:1,sorel:1}]]},
- {q:'你更适应哪种工作环境：',o:[['非正式、低成本，但信息流动很快的小圈子',{underground:1,newspaper:1,limonov:1}],['需要地图、结构图或白板来帮助讨论',{map:1,eurasia:1,dugin:1}],['不依赖固定空间，更看重即时表达和现场反馈',{noise:1,punk:1,letov:1}],['安静、封闭，适合长时间处理复杂文本',{book:1,spengler:1,yockey:1}]]},
- {q:'组织刚起步时，你最先处理什么：',o:[['名称、标识、口径和传播形式',{symbol:1,slogan:1,liujianqun:1,ledesma:1}],['学习、分工、纪律和负责人机制',{youth:1,org:1,discipline:1,hezhonghan:1}],['成员筛选、训练和任务分配',{training:1,org:1,kangze:1}],['名单、渠道、信息流向和实际执行能力',{archive:1,shadow:1,daili:1,kangsheng:1}]]},
- {q:'面对混乱争论，你更关心：',o:[['谁有权宣布讨论到此为止',{law:1,decision:1,schmitt:1}],['怎样写成章程、分工和流程',{law:1,admin:1,order:1}],['怎样整理成标准解释文本',{orthodoxy:1,text:1,daijitao:1}],['谁掌握人事、审批和培训节点',{admin:1,network:1,chenlifu:1}]]},
- {q:'你对地图的第一反应更接近：',o:[['地理空间会塑造长期政治结构',{map:1,eurasia:1,dugin:1}],['眼前事务最终会通向一个更大的战略终局',{map:1,strategy:1,ishiwara:1}],['文明会在空间中演化、迁徙和衰退',{civilization:1,map:1,spengler:1}],['结构本身如何变形比距离更重要',{math:1,map:1,teichmuller:1}]]},
- {q:'你最容易被哪种文本吸引：',o:[['阅读门槛高，但能重塑问题框架的厚书',{book:1,spengler:1,yockey:1}],['短小、尖锐、立场很清楚的小册子',{pamphlet:1,split:1,otto:1}],['文学、经济和文明问题互相缠绕的文本',{literature:1,money:1,pound:1}],['形式粗糙但表达密度很高的地下刊物',{underground:1,noise:1,letov:1}]]},
- {q:'如果资源有限，你仍然会重视：',o:[['活动的形式、秩序和整体观感',{aesth:1,perform:1,ritual:1,dannunzio:1}],['视觉上的速度感和动态冲击',{futur:1,aesth:1,speed:1,marinetti:1}],['身体管理、写作和个人形象的一致性',{body:1,ritual:1,mishima:1}],['传播口径、预算和外部可见度',{newspaper:1,money:1,mussolini:1}]]},
- {q:'你整理资料时更自然出现：',o:[['层级、编号、符号和固定归档规则',{archive:1,mystic:1,order:1,himmler:1}],['观念、传统和来源的追溯',{trad:1,mystic:1,evola:1}],['关系、渠道和信息分布',{shadow:1,archive:1,daili:1}],['概率、变量和可观测结构',{physics:1,random:1,jordan:1}]]},
- {q:'你最不能接受一个组织怎样变坏：',o:[['路线变味却假装没有变化',{split:1,pamphlet:1,otto:1}],['只有会写长文的人，没有基层网络',{org:1,network:1,gregor:1}],['太松散，没有训练和任务机制',{discipline:1,training:1,kangze:1}],['太体面，丧失边缘经验和识别度',{underground:1,newspaper:1,limonov:1}]]},
- {q:'你更倾向怎样理解现代性：',o:[['它打断了传统层级与精神秩序',{trad:1,mystic:1,evola:1}],['它带来速度、机器和新的视觉语法',{speed:1,futur:1,marinetti:1}],['它进入文明周期中的晚期阶段',{civilization:1,doom:1,spengler:1}],['它需要从法律和决断结构上重新理解',{law:1,decision:1,schmitt:1}]]},
- {q:'你对“青年组织”的想法更接近：',o:[['先建立学习、纪律和干部机制',{youth:1,discipline:1,hezhonghan:1}],['先确定名称、标识、口号和刊物',{symbol:1,youth:1,liujianqun:1}],['需要稳定训练和基层任务',{training:1,youth:1,kangze:1}],['需要更强的小组承诺与共同体密度',{ritual:1,religion:1,codreanu:1}]]},
- {q:'你最擅长把问题转成什么：',o:[['传播计划、预算和对外账号',{newspaper:1,money:1,mussolini:1}],['战略图、路径和长期节点',{map:1,strategy:1,ishiwara:1}],['标准解释文本和教育材料',{text:1,pedagogy:1,daijitao:1}],['人事结构、审批链和组织网络',{admin:1,network:1,chenlifu:1}]]},
- {q:'你对“左/右”标签的态度：',o:[['我更关心反资本和工团式组织问题',{antiCapital:1,syndical:1,valois:1}],['我更关心民族形式与反西方现代性的结合',{nationalBolshevik:1,antiWest:1,niekisch:1}],['我更关心地图、文明和欧亚结构',{eurasia:1,map:1,dugin:1}],['我更关心地下表达和审美立场',{underground:1,punk:1,letov:1}]]},
- {q:'最后，哪种描述最像你的判断方式：',o:[['把混乱现实压成可执行的组织流程',{org:1,admin:1,hand:1}],['把细节放入文明周期和长期结构',{civilization:1,doom:1,book:1}],['把文本、符号和形式统一成完整表达',{aesth:1,text:1,perform:1}],['把信息、关系和风险先归档再行动',{archive:1,shadow:1,ice:1}]]}
+function c(id,name,meta,tags,v,desc){return {id,name,meta,tags,v,desc};}
+const Q = [
+ q('你怎么看待“群众”这个概念：', a('它需要某种共享叙事，否则很难形成持续行动',{myth:1,strike:1,sorel:1}), a('它首先依赖基层网络、地方节点和长期组织',{org:1,network:1,gregor:1}), a('它需要稳定训练和分工，否则热情难以维持',{discipline:1,youth:1,kangze:1}), a('相比宏大概念，我更关注小范围共同体的实际连接',{underground:1,exile:1,limonov:1})),
+ q('如果你要办一个新刊物，最重要的是：', a('刊名要有识别度，最好能让人一眼记住',{newspaper:1,symbol:1,liujianqun:1}), a('第一期要先说明自己的分歧和基本立场',{split:1,pamphlet:1,otto:1}), a('不必追求大众化，但要有清楚的理论密度',{book:1,spengler:1,yockey:1}), a('文本不应只停留在表达，还要影响人的判断和行动',{myth:1,strike:1,sorel:1})),
+ q('你更适应哪种工作环境：', a('非正式、低成本，但信息流动很快的小圈子',{underground:1,newspaper:1,limonov:1}), a('需要地图、结构图或白板来帮助讨论',{map:1,eurasia:1,dugin:1}), a('不依赖固定空间，更看重即时表达和现场反馈',{noise:1,punk:1,letov:1}), a('安静、封闭，适合长时间处理复杂文本',{book:1,spengler:1,yockey:1})),
+ q('组织刚起步时，你最先处理什么：', a('名称、标识、口径和传播形式',{symbol:1,newspaper:1,liujianqun:1}), a('学习、分工、纪律和负责人机制',{youth:1,org:1,discipline:1,hezhonghan:1}), a('成员筛选、训练和任务分配',{training:1,org:1,kangze:1}), a('名单、渠道、信息流向和实际执行能力',{archive:1,shadow:1,daili:1,kangsheng:1})),
+ q('面对混乱争论，你更关心：', a('谁有权宣布讨论到此为止',{law:1,decision:1,schmitt:1}), a('怎样写成章程、分工和流程',{law:1,admin:1,order:1}), a('怎样整理成标准解释文本',{orthodoxy:1,text:1,daijitao:1}), a('谁掌握人事、审批和培训节点',{admin:1,network:1,chenlifu:1})),
+ q('你对地图的第一反应更接近：', a('地理空间会塑造长期政治结构',{map:1,eurasia:1,dugin:1}), a('眼前事务最终会通向一个更大的战略终局',{map:1,strategy:1,ishiwara:1}), a('文明会在空间中演化、迁徙和衰退',{civilization:1,map:1,spengler:1}), a('结构本身如何变形比距离更重要',{math:1,map:1,teichmuller:1})),
+ q('你最容易被哪种文本吸引：', a('阅读门槛高，但能重塑问题框架的厚书',{book:1,spengler:1,yockey:1}), a('短小、尖锐、立场很清楚的小册子',{pamphlet:1,split:1,otto:1}), a('文学、经济和文明问题互相缠绕的文本',{literature:1,money:1,pound:1}), a('形式粗糙但表达密度很高的地下刊物',{underground:1,noise:1,letov:1})),
+ q('如果资源有限，你仍然会重视：', a('活动的形式、秩序和整体观感',{aesth:1,perform:1,ritual:1,dannunzio:1}), a('视觉上的速度感和动态冲击',{futur:1,aesth:1,speed:1,marinetti:1}), a('身体管理、写作和个人形象的一致性',{body:1,ritual:1,mishima:1}), a('传播口径、预算和外部可见度',{newspaper:1,money:1,mussolini:1})),
+ q('你整理资料时更自然出现：', a('层级、编号、符号和固定归档规则',{archive:1,mystic:1,order:1,himmler:1}), a('观念、传统和来源的追溯',{trad:1,mystic:1,evola:1}), a('关系、渠道和信息分布',{shadow:1,archive:1,daili:1}), a('概率、变量和可观测结构',{physics:1,random:1,jordan:1})),
+ q('你最不能接受一个组织怎样变坏：', a('路线变味却假装没有变化',{split:1,pamphlet:1,otto:1}), a('只有会写长文的人，没有基层网络',{org:1,network:1,gregor:1}), a('太松散，没有训练和任务机制',{discipline:1,training:1,kangze:1}), a('太体面，丧失边缘经验和识别度',{underground:1,newspaper:1,limonov:1})),
+ q('你更倾向怎样理解现代性：', a('它打断了传统层级与精神秩序',{trad:1,mystic:1,evola:1}), a('它带来速度、机器和新的视觉语法',{speed:1,futur:1,marinetti:1}), a('它进入文明周期中的晚期阶段',{civilization:1,doom:1,spengler:1}), a('它需要从法律和决断结构上重新理解',{law:1,decision:1,schmitt:1})),
+ q('你对“青年组织”的想法更接近：', a('先建立学习、纪律和干部机制',{youth:1,discipline:1,hezhonghan:1}), a('先确定名称、标识、口径和刊物',{symbol:1,youth:1,liujianqun:1}), a('需要稳定训练和基层任务',{training:1,youth:1,kangze:1}), a('需要更强的小组承诺与共同体密度',{ritual:1,religion:1,codreanu:1})),
+ q('你最擅长把问题转成什么：', a('传播计划、预算和对外账号',{newspaper:1,money:1,mussolini:1}), a('战略图、路径和长期节点',{map:1,strategy:1,ishiwara:1}), a('标准解释文本和教育材料',{text:1,pedagogy:1,daijitao:1}), a('人事结构、审批链和组织网络',{admin:1,network:1,chenlifu:1})),
+ q('你对“左/右”标签的态度：', a('我更关心反资本和工团式组织问题',{antiCapital:1,syndical:1,valois:1}), a('我更关心民族形式与反西方现代性的结合',{nationalBolshevik:1,antiWest:1,niekisch:1}), a('我更关心地图、文明和欧亚结构',{eurasia:1,map:1,dugin:1}), a('我更关心地下表达和审美立场',{underground:1,punk:1,letov:1})),
+ q('最后，哪种描述最像你的判断方式：', a('把混乱现实压成可执行的组织流程',{org:1,admin:1,hand:1}), a('把细节放入文明周期和长期结构',{civilization:1,doom:1,book:1}), a('把文本、符号和形式统一成完整表达',{aesth:1,text:1,perform:1}), a('把信息、关系和风险先归档再行动',{archive:1,shadow:1,ice:1}))
 ];
-let idx=0,score={},answerTexts=[];
-function add(t){for(const k in t)score[k]=(score[k]||0)+t[k]}
-function sim(c){let s=0;for(const k in c.v)s+=(score[k]||0)*c.v[k];s+=(score[c.id]||0)*4;return s}
-function pick(){let arr=C.map(c=>({c,s:sim(c)})).sort((a,b)=>b.s-a.s);let top=arr[0];let raw=score;
- const egg=[['jordan',raw.physics>=2&&raw.random>=1],['teichmuller',raw.math>=1&&raw.map>=2],['kangsheng',raw.archive>=2&&raw.shadow>=2],['yockey',raw.spengler>=2&&raw.book>=2],['limonov',raw.underground>=2&&raw.newspaper>=1],['dugin',raw.map>=2&&raw.eurasia>=1&&raw.mystic>=1],['letov',raw.noise>=1&&raw.punk>=1]];
- for(const [id,on] of egg){if(on){const c=C.find(x=>x.id===id);if(c)return {c,s:top.s,arr}}}return {...top,arr}}
-function renderQ(){document.getElementById('step').textContent=`${idx+1} / ${Q.length}`;document.getElementById('bar').style.width=((idx)/Q.length*100)+'%';let q=Q[idx];document.getElementById('qText').textContent=q.q;let box=document.getElementById('opts');box.innerHTML='';q.o.forEach(([txt,tags])=>{let b=document.createElement('button');b.className='opt';b.textContent=txt;b.onclick=()=>{answerTexts.push(txt);add(tags);idx++;if(idx<Q.length)renderQ();else showResult()};box.appendChild(b)})}
-function showResult(){document.getElementById('quiz').classList.add('hidden');document.getElementById('result').classList.remove('hidden');document.getElementById('bar').style.width='100%';let {c,arr}=pick();document.getElementById('rName').textContent=c.name;document.getElementById('rMeta').textContent=c.meta;document.getElementById('rDesc').textContent=c.desc;let img=document.getElementById('rImg');img.src=IMAGES[c.id]||'';img.alt=c.name;img.onerror=()=>{img.style.display='none'};let tags=document.getElementById('rTags');tags.innerHTML='';c.tags.forEach(t=>{let p=document.createElement('span');p.className='pill';p.textContent=t;tags.appendChild(p)});document.getElementById('rScores').innerHTML='候选前五：'+arr.slice(0,5).map(x=>`${x.c.name} ${Math.round(x.s)}`).join(' · ')}
-document.getElementById('startBtn').onclick=()=>{document.getElementById('cover').classList.add('hidden');document.getElementById('quiz').classList.remove('hidden');renderQ()};
-document.getElementById('againBtn').onclick=()=>{idx=0;score={};answerTexts=[];document.getElementById('result').classList.add('hidden');document.getElementById('quiz').classList.remove('hidden');document.getElementById('rImg').style.display='block';renderQ()};
-document.getElementById('copyBtn').onclick=async()=>{const t=document.getElementById('rName').textContent+'｜'+document.getElementById('rMeta').textContent;try{await navigator.clipboard.writeText(t);document.getElementById('copyBtn').textContent='已复制'}catch(e){alert(t)}};
+function q(text,...opts){return {q:text,o:opts};}
+function a(text,tags){return {text,tags};}
+let idx = 0;
+let score = Object.create(null);
+function add(tags){for(const [k,v] of Object.entries(tags)) score[k] = (score[k] || 0) + v;}
+function sim(ch){let s=0; for(const [k,v] of Object.entries(ch.v)) s += (score[k] || 0) * v; s += (score[ch.id] || 0) * 4; return s;}
+function pick(){
+  const ranked = C.map(ch => ({ch, s: sim(ch)})).sort((x,y)=>y.s-x.s);
+  const raw = score;
+  const eggs = [
+    ['jordan', raw.physics>=2 && raw.random>=1],
+    ['teichmuller', raw.math>=1 && raw.map>=2],
+    ['kangsheng', raw.archive>=2 && raw.shadow>=2],
+    ['yockey', raw.spengler>=2 && raw.book>=2],
+    ['limonov', raw.underground>=2 && raw.newspaper>=1],
+    ['dugin', raw.map>=2 && raw.eurasia>=1 && raw.mystic>=1],
+    ['letov', raw.noise>=1 && raw.punk>=1]
+  ];
+  for(const [id,on] of eggs){ if(on){ const ch = C.find(x=>x.id===id); if(ch) return {ch, ranked}; }}
+  return {ch: ranked[0].ch, ranked};
+}
+function renderQ(){
+  const item = Q[idx];
+  $('step').textContent = `${idx+1} / ${Q.length}`;
+  $('bar').style.width = `${idx / Q.length * 100}%`;
+  $('qText').textContent = item.q;
+  const box = $('opts'); box.innerHTML = '';
+  item.o.forEach(opt => {
+    const b = document.createElement('button');
+    b.className = 'opt'; b.type = 'button'; b.textContent = opt.text;
+    b.addEventListener('click', () => { add(opt.tags); idx++; idx < Q.length ? renderQ() : showResult(); });
+    box.appendChild(b);
+  });
+}
+function showResult(){
+  $('quiz').classList.add('hidden'); $('result').classList.remove('hidden'); $('bar').style.width = '100%';
+  const {ch, ranked} = pick();
+  $('rName').textContent = ch.name; $('rMeta').textContent = ch.meta; $('rDesc').textContent = ch.desc;
+  const img = $('rImg'); img.style.display = 'block'; img.src = IMAGES[ch.id] || ''; img.alt = ch.name; img.onerror = () => { img.style.display = 'none'; };
+  const tags = $('rTags'); tags.innerHTML = ''; ch.tags.forEach(t => { const p = document.createElement('span'); p.className = 'pill'; p.textContent = t; tags.appendChild(p); });
+  $('rScores').textContent = '候选前五：' + ranked.slice(0,5).map(x => `${x.ch.name} ${Math.round(x.s)}`).join(' · ');
+}
+function reset(){idx=0; score=Object.create(null); $('result').classList.add('hidden'); $('quiz').classList.remove('hidden'); renderQ();}
+function boot(){
+  $('startBtn').addEventListener('click', () => { $('cover').classList.add('hidden'); $('quiz').classList.remove('hidden'); renderQ(); });
+  $('againBtn').addEventListener('click', reset);
+  $('copyBtn').addEventListener('click', async () => { const t = `${$('rName').textContent}｜${$('rMeta').textContent}`; try{ await navigator.clipboard.writeText(t); $('copyBtn').textContent='已复制'; } catch(e){ alert(t); } });
+}
+try { boot(); } catch (e) { $('err').style.display='block'; $('err').textContent = e.stack || String(e); }
+})();
 </script>
 </body>
 </html>
