@@ -4,6 +4,18 @@
   "仅供参考", "test results only", or any disclaimer text.
   This is a historical style matcher — no disclaimers needed.
 -->
+<!--
+  ⛔⛔⛔ STABLE AUDIT INTERFACE — DO NOT BREAK ⛔⛔⛔
+  The @AUDIT block below is a STABLE CONTRACT used by CI (scripts/check-coverage.js).
+  - @AUDIT keys MUST stay machine-parseable: version=N algorithm=NAME chars=N questions=N
+  - @AUDIT_CHARS MUST list EVERY character id separated by spaces
+  - When adding/removing characters: UPDATE both the JS C array AND these annotations
+  - When changing the scoring algorithm: UPDATE @AUDIT algorithm= value
+  - Breaking this contract WILL cause CI failure (check-coverage.js exits non-zero)
+  ⛔⛔⛔ DO NOT REMOVE OR REFORMAT THIS BLOCK ⛔⛔⛔
+  @AUDIT version=1 algorithm=cosine-exposure chars=35 questions=15
+  @AUDIT_CHARS mussolini dannunzio marinetti nietzsche spengler schmitt evola franco joseantonio himmler codreanu ishiwara itagaki kita okawa daijitao hezhonghan liujianqun kangze daili chenlifu kangsheng mishima pound sorel valois gregor otto niekisch yockey limonov dugin letov jordan teichmuller
+-->
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -298,7 +310,7 @@ const C = [
  c('himmler','希姆莱','档案 · 谱系 · 组织仪式',['档案','层级','固定规则'],{archive:3,mystic:2,order:3,ritual:2,org:2},'整理资料时自然形成层级、编号、符号和固定归档规则。'),
  c('codreanu','科德里亚努','青年 · 宗教感 · 小组承诺',['纪律','共同体','承诺'],{youth:3,ritual:2,religion:2,group:2,doom:1},'关注小组织内部的承诺、纪律和共同体密度，不满足于松散合作。'),
  c('ishiwara','石原莞尔','地图 · 战略 · 终局',['战略','地缘','大局'],{map:3,strategy:3,religion:1,hand:2,mystic:1},'对待地图的方式不是导航导向，而是为了理解眼前事务通向怎样的长期结构。'),
- c('itagaki','板垣征四郎','军务 · 执行 · 现场',['军略','执行','组织'],{hand:3,org:2,strategy:2,ice:1,admin:1},'倾向于将复杂判断落实到具体执行链上，不满足于停留在解释层面。'),
+ c('itagaki','板垣征四郎','军务 · 执行 · 现场',['军略','执行','组织'],{hand:3,org:2,strategy:3,ice:1,admin:1},'倾向于将复杂判断落实到具体执行链上，不满足于停留在解释层面。'),
  c('kita','北一辉','蓝图 · 改造 · 青年',['纲领','理论','改革'],{theory:3,youth:2,text:2,volc:2,org:1},'倾向于将分散的不满整理成系统蓝图，给分散情绪赋予明确结构。'),
  c('okawa','大川周明','泛亚 · 宗教 · 书斋',['泛亚','宗教','知识网络'],{religion:2,book:2,asia:3,brain:2,mystic:1},'倾向于从文明、宗教和区域结构理解政治，而非局限于一时一地的视角。'),
  c('daijitao','戴季陶','正统解释 · 文本 · 教育',['正统','解释权','文本'],{orthodoxy:3,text:3,pedagogy:2,religion:1,order:2},'重视概念的解释规范性，倾向于主动建立标准读法和解释框架。'),
@@ -338,10 +350,12 @@ const Q = [
  q('关于“青年组织”，更接近的观点是：', a('先建立学习、纪律和干部机制',{youth:1,discipline:1,hezhonghan:1}), a('先确定名称、标识、口径和刊物',{symbol:1,youth:1,liujianqun:1}), a('需要稳定训练和基层任务',{training:1,youth:1,kangze:1}), a('需要更强的小组承诺与共同体密度',{ritual:1,religion:1,codreanu:1})),
  q('处理问题时更擅长将其转化为：', a('传播计划、预算和对外账号',{newspaper:1,money:1,mussolini:1}), a('战略图、路径和长期节点',{map:1,strategy:1,ishiwara:1}), a('标准解释文本和教育材料',{text:1,pedagogy:1,daijitao:1}), a('人事结构、审批链和组织网络',{admin:1,network:1,chenlifu:1})),
  q('对“左/右”标签的态度：', a('更关心反资本和工团式组织问题',{antiCapital:1,syndical:1,valois:1}), a('更关心民族形式与反西方现代性的结合',{nationalBolshevik:1,antiWest:1,niekisch:1}), a('更关心地图、文明和欧亚结构',{eurasia:1,map:1,dugin:1}), a('更关心地下表达和审美立场',{underground:1,punk:1,letov:1})),
- q('以下哪种描述最接近判断方式：', a('把混乱现实压成可执行的组织流程',{org:1,admin:1,hand:1}), a('把细节放入文明周期和长期结构',{civilization:1,doom:1,book:1}), a('把文本、符号和形式统一成完整表达',{aesth:1,text:1,perform:1,nietzsche:1}), a('把信息、关系和风险先归档再行动',{archive:1,shadow:1,ice:1}))
+ q('以下哪种描述最接近判断方式：', a('把混乱现实压成可执行的组织流程',{org:1,admin:1,hand:1,itagaki:1}), a('把细节放入文明周期和长期结构',{civilization:1,doom:1,book:1}), a('把文本、符号和形式统一成完整表达',{aesth:1,text:1,perform:1,nietzsche:1}), a('把信息、关系和风险先归档再行动',{archive:1,shadow:1,ice:1}))
 ];
 function q(text,...opts){return {q:text,o:opts};}
 function a(text,tags){return {text,tags};}
+/* ⛔ STABLE AUDIT — DO NOT BREAK: scoring algorithm & id-bonus used by CI check-coverage.js ⛔ */
+/*@AUDIT:scoring=exposure-normalized-cosine id-bonus=6x */
 let idx=0,score=Object.create(null),exposure;
 function buildExposure(items){const o={};for(const q of items)for(const opt of q.o)for(const[k,v]of Object.entries(opt.tags||{}))o[k]=(o[k]||0)+Math.abs(v);return o}
 function scaled(k,v){return v/Math.sqrt(exposure[k]||1)}
