@@ -11,6 +11,16 @@
 <title>Fascisti Quiz</title>
 <meta name="description" content="历史人物风格匹配小测试。">
 <style>
+@font-face{
+  font-family:"文瀚建筑体";
+  src:url("asset/font/wenhan.ttf") format("truetype");
+  font-display:swap
+}
+@font-face{
+  font-family:"锐正";
+  src:url("asset/font/ruizheng.ttf") format("truetype");
+  font-display:swap
+}
 /* === SEMANTIC FONT SYSTEM ===
  * 超事件 / Super-Event   → 文瀚建筑体 (title, result name)
  * 国策文本 / Policy Text  → 锐正       (questions, options, descriptions, hints)
@@ -63,9 +73,9 @@ body::after{
   color:var(--muted);font-size:12px;font-weight:400
 }
 
-/* title: Aldrich / cyan-bright / CRT glow */
+/* title: 超事件 — 文瀚建筑体 / cyan-bright / CRT glow */
 .title .em{color:var(--red);text-shadow:0 0 40px rgba(196,0,0,.3),0 0 80px rgba(196,0,0,.1)}.title{
-  font-family:"Aldrich","SF Mono",monospace;
+  font-family:"文瀚建筑体","Noto Serif SC","Songti SC",serif;
   font-size:clamp(44px,8vw,88px);line-height:.92;
   margin:20px 0 16px;font-weight:900;
   color:var(--cyan-bright);
@@ -109,21 +119,21 @@ body::after{
 }
 .qtop span:last-child{color:var(--muted)}
 
-/* question: system sans-serif */
+/* question: 国策文本 — 锐正 / text color */
 .q{
-  font-family:"Noto Sans SC","Source Han Sans SC","PingFang SC",sans-serif;
+  font-family:"锐正","RuiZheng","Noto Sans SC","Source Han Sans SC","PingFang SC",sans-serif;
   font-size:23px;margin:16px 0 20px;color:var(--text);font-weight:500
 }
 
 /* === OPTIONS === */
 .opts{display:grid;gap:10px}
 
-/* option: system sans-serif */
+/* option: 国策文本 — 锐正 */
 .opt{
   width:100%;text-align:left;
   background:var(--panel2);border:1px solid rgba(79,215,215,.08);
   padding:16px 20px;cursor:pointer;
-  font-family:"Noto Sans SC","Source Han Sans SC","PingFang SC",sans-serif;
+  font-family:"锐正","RuiZheng","Noto Sans SC","Source Han Sans SC","PingFang SC",sans-serif;
   font-size:16px;color:var(--text);
   transition:border-color .15s,background .15s
 }
@@ -145,9 +155,9 @@ body::after{
   box-shadow:0 0 30px rgba(79,215,215,.06)
 }
 
-/* result name: Aldrich / cyan-bright glow */
+/* result name: 超事件 — 文瀚建筑体 / cyan-bright glow */
 .name{
-  font-family:"Aldrich","SF Mono",monospace;
+  font-family:"文瀚建筑体","Noto Serif SC","Songti SC",serif;
   font-size:44px;line-height:1.05;margin:0;font-weight:900;
   color:var(--cyan-bright);
   text-shadow:0 0 30px rgba(154,251,255,.25)
@@ -160,9 +170,9 @@ body::after{
   margin:8px 0 12px;font-size:14px
 }
 
-/* description: system sans-serif */
+/* description: 国策文本 — 锐正 */
 .desc{
-  font-family:"Noto Sans SC","Source Han Sans SC","PingFang SC",sans-serif;
+  font-family:"锐正","RuiZheng","Noto Sans SC","Source Han Sans SC","PingFang SC",sans-serif;
   font-size:17px;color:var(--text);line-height:1.7
 }
 
