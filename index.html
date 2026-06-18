@@ -1,2 +1,385 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fascisti Quiz</title><meta name="description" content="历史人物风格匹配小测试。"><style>:root{--bg:#05080A;--panel:#10191C;--panel2:#182629;--text:#DDE8E6;--muted:#7A8C8C;--cyan:#4FD7D7;--cyan-bright:#9AFBFF;--red:#C40000}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"Aldrich","SF Mono",monospace;line-height:1.6}.wrap{max-width:960px;margin:0 auto;padding:40px 20px 80px}.card{background:var(--panel);border:1px solid rgba(79,215,215,.15);box-shadow:0 0 40px rgba(79,215,215,.04),inset 0 0 80px rgba(79,215,215,.015);padding:32px}.hero{text-align:center;padding:64px 24px}.eyebrow{letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-size:12px}.title{font-family:"文瀚建筑体","Noto Serif SC",serif;font-size:clamp(44px,8vw,88px);line-height:.92;margin:20px 0 16px;font-weight:900;color:var(--cyan-bright);text-shadow:0 0 40px rgba(154,251,255,.3)}.btn{appearance:none;border:1px solid rgba(79,215,215,.3);outline:none;background:var(--panel2);color:var(--text);font:inherit;padding:12px 28px;font-size:14px;letter-spacing:.08em;cursor:pointer;margin-top:24px}.btn:hover{border-color:var(--cyan);box-shadow:0 0 16px rgba(79,215,215,.15)}.btn.secondary{background:transparent;border-color:rgba(122,140,140,.3);color:var(--muted)}.progress{height:3px;background:var(--panel2);margin:20px 0 28px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--cyan-bright));box-shadow:0 0 8px rgba(79,215,215,.5);transition:width .3s}.qtop{display:flex;justify-content:space-between;gap:12px;color:var(--cyan);font-size:13px}.qtop span:last-child{color:var(--muted)}.q{font-family:"锐正","Noto Sans SC",sans-serif;font-size:23px;margin:16px 0 20px}.opts{display:grid;gap:10px}.opt{width:100%;text-align:left;background:var(--panel2);border:1px solid rgba(79,215,215,.08);padding:16px 20px;cursor:pointer;font-family:"锐正","Noto Sans SC",sans-serif;font-size:16px;color:var(--text)}.opt:hover{border-color:var(--cyan);background:rgba(79,215,215,.05)}.result{display:grid;grid-template-columns:minmax(200px,300px) 1fr;gap:30px;align-items:start}.portrait{width:100%;aspect-ratio:3/4;object-fit:cover;border:1px solid rgba(79,215,215,.2);background:var(--panel2)}.name{font-family:"文瀚建筑体","Noto Serif SC",serif;font-size:44px;line-height:1.05;margin:0;font-weight:900;color:var(--cyan-bright)}.meta{color:var(--red);letter-spacing:.06em;margin:8px 0 12px;font-size:14px}.desc{font-family:"锐正","Noto Sans SC",sans-serif;font-size:17px;line-height:1.7}.pillrow{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.pill{border:1px solid rgba(79,215,215,.25);padding:4px 12px;color:var(--cyan);font-size:12px;background:rgba(79,215,215,.04)}.scores{margin-top:20px;border-top:1px solid rgba(79,215,215,.1);padding-top:18px;color:var(--muted);font-size:13px}.err{white-space:pre-wrap;background:rgba(196,0,0,.08);border:1px solid rgba(196,0,0,.3);padding:14px;color:var(--red);margin-top:16px;display:none;font-size:13px}.hidden{display:none}@media(max-width:760px){.result{grid-template-columns:1fr}.hero{padding:40px 16px}.card{padding:20px}.name{font-size:34px}.q{font-size:20px}}</style></head><body><div class="wrap"><section id="cover" class="card hero"><div class="eyebrow">historical style matcher</div><h1 class="title">Fascisti Quiz</h1><button class="btn" id="startBtn" type="button">开始测试</button><div class="scores" id="diag"></div><div id="err" class="err"></div></section><section id="quiz" class="card hidden"><div class="qtop"><span id="step"></span><span>选择最接近的一项</span></div><div class="progress"><div class="bar" id="bar"></div></div><h2 class="q" id="qText"></h2><div class="opts" id="opts"></div></section><section id="result" class="card hidden"><div class="result"><img class="portrait" id="rImg" alt=""><div><div class="eyebrow">匹配结果</div><h2 class="name" id="rName"></h2><div class="meta" id="rMeta"></div><p class="desc" id="rDesc"></p><div class="pillrow" id="rTags"></div><div class="scores" id="rScores"></div><button class="btn" id="againBtn" type="button">重新测试</button> <button class="btn secondary" id="copyBtn" type="button">复制结果</button></div></div></section></div><script src="quiz-data-a.js"></script><script src="quiz-data-b.js"></script><script>(()=>{'use strict';const DATA=(window.QUIZ_DATA_A||'')+(window.QUIZ_DATA_B||''),$=id=>document.getElementById(id);let C,Q,IMAGES,idx=0,score=Object.create(null),exposure;async function load(){const bin=Uint8Array.from(atob(DATA),c=>c.charCodeAt(0));const txt=await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream('gzip'))).text();const d=JSON.parse(txt);IMAGES=d.I;C=d.C.map(x=>({id:x[0],name:x[1],meta:x[2],tags:x[3],v:x[4],desc:x[5]}));Q=d.Q.map(x=>({q:x[0],o:x[1].map(y=>({text:y[0],tags:y[1]}))}));exposure=buildExposure(Q)}function buildExposure(items){const out=Object.create(null);for(const q of items)for(const opt of q.o)for(const[k,v]of Object.entries(opt.tags||{}))out[k]=(out[k]||0)+Math.abs(v);return out}function add(tags){for(const[k,v]of Object.entries(tags||{}))score[k]=(score[k]||0)+v}function scaled(k,v){return v/Math.sqrt(exposure[k]||1)}function sim(ch){let dot=0,norm=0;for(const[k,v]of Object.entries(ch.v||{})){const cv=scaled(k,v),sv=scaled(k,score[k]||0);dot+=sv*cv;norm+=cv*cv}let s=norm?dot/Math.sqrt(norm):0;if(score[ch.id])s+=4*scaled(ch.id,score[ch.id]);return s}function pick(){const ranked=C.map(ch=>({ch,s:sim(ch)})).sort((x,y)=>y.s-x.s);return{ch:ranked[0].ch,ranked}}function renderQ(){const item=Q[idx];$('step').textContent=`${idx+1} / ${Q.length}`;$('bar').style.width=`${idx/Q.length*100}%`;$('qText').textContent=item.q;const box=$('opts');box.innerHTML='';item.o.forEach(opt=>{const b=document.createElement('button');b.className='opt';b.type='button';b.textContent=opt.text;b.onclick=()=>{add(opt.tags);idx++;idx<Q.length?renderQ():showResult()};box.appendChild(b)})}function showResult(){$('quiz').classList.add('hidden');$('result').classList.remove('hidden');$('bar').style.width='100%';const{ch,ranked}=pick();$('rName').textContent=ch.name;$('rMeta').textContent=ch.meta;$('rDesc').textContent=ch.desc;const img=$('rImg');if(IMAGES[ch.id]){img.style.display='block';img.src=IMAGES[ch.id];img.alt=ch.name;img.onerror=()=>{img.style.display='none'}}else{img.removeAttribute('src');img.alt='';img.style.display='none'}const tags=$('rTags');tags.innerHTML='';ch.tags.forEach(t=>{const p=document.createElement('span');p.className='pill';p.textContent=t;tags.appendChild(p)});$('rScores').textContent='候选前五：'+ranked.slice(0,5).map(x=>`${x.ch.name} ${x.s.toFixed(1)}`).join(' · ')}function reset(){idx=0;score=Object.create(null);$('result').classList.add('hidden');$('quiz').classList.remove('hidden');renderQ()}async function boot(){await load();$('startBtn').onclick=()=>{$('cover').classList.add('hidden');$('quiz').classList.remove('hidden');renderQ()};$('againBtn').onclick=reset;$('copyBtn').onclick=async()=>{const t=`${$('rName').textContent}｜${$('rMeta').textContent}`;try{await navigator.clipboard.writeText(t);$('copyBtn').textContent='已复制'}catch(e){alert(t)}};$('diag').textContent=`人物 ${C.length} · 题目 ${Q.length} · balance: exposure-normalized`}boot().catch(e=>{$('err').style.display='block';$('err').textContent=e.stack||String(e)})})();</script></body></html>
+<!--
+  ⛔ DO NOT ADD: disclaimers, 免责声明, political disclaimers,
+  "仅供参考", "test results only", or any disclaimer text.
+  This is a historical style matcher — no disclaimers needed.
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fascisti Quiz</title>
+<meta name="description" content="历史人物风格匹配小测试。">
+<style>
+/* === SEMANTIC FONT SYSTEM ===
+ * 超事件 / Super-Event   → 文瀚建筑体 (title, result name)
+ * 国策文本 / Policy Text  → 锐正       (questions, options, descriptions, hints)
+ * 终端数据 / Terminal     → Aldrich    (labels, numbers, meta, tags, scores, buttons)
+ * === COLOR PALETTE ===
+ * bg:#05080A panel:#10191C panel2:#182629
+ * text:#DDE8E6 muted:#7A8C8C
+ * cyan:#4FD7D7 cyan-bright:#9AFBFF
+ * red:#C40000 yellow:#D6B04A green:#70B36A
+ */
+:root{
+  --bg:#05080A;--panel:#10191C;--panel2:#182629;
+  --text:#DDE8E6;--muted:#7A8C8C;
+  --cyan:#4FD7D7;--cyan-bright:#9AFBFF;
+  --red:#C40000;--yellow:#D6B04A;--green:#70B36A
+}
+*,*::before,*::after{box-sizing:border-box}
+
+/* === BASE === */
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:"Aldrich","SF Mono","Cascadia Code","Menlo",monospace;
+  line-height:1.6;-webkit-font-smoothing:antialiased
+}
+
+/* === CRT SCANLINE OVERLAY === */
+body::after{
+  content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px);
+  pointer-events:none;z-index:9999
+}
+
+/* === BORDER GLOW === */
+.wrap{max-width:960px;margin:0 auto;padding:40px 20px 80px}
+
+/* === PANEL === */
+.card{
+  background:var(--panel);border:1px solid rgba(79,215,215,.15);
+  box-shadow:0 0 40px rgba(79,215,215,.04),inset 0 0 80px rgba(79,215,215,.015);
+  padding:32px
+}
+
+/* === HERO / COVER === */
+.hero{text-align:center;padding:64px 24px}
+
+/* eyebrow: 终端标签 — Aldrich / muted / 小号大写 */
+.eyebrow{
+  font-family:"Aldrich","SF Mono",monospace;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);font-size:12px;font-weight:400
+}
+
+/* title: Aldrich / cyan-bright / CRT glow */
+.title .em{color:var(--red);text-shadow:0 0 40px rgba(196,0,0,.3),0 0 80px rgba(196,0,0,.1)}.title{
+  font-family:"Aldrich","SF Mono",monospace;
+  font-size:clamp(44px,8vw,88px);line-height:.92;
+  margin:20px 0 16px;font-weight:900;
+  color:var(--cyan-bright);
+  text-shadow:0 0 40px rgba(154,251,255,.3),0 0 80px rgba(154,251,255,.1);
+}
+
+/* === BUTTONS === */
+.btn{
+  appearance:none;border:1px solid rgba(79,215,215,.3);outline:none;
+  background:var(--panel2);color:var(--text);
+  font-family:"Aldrich","SF Mono",monospace;
+  padding:12px 28px;font-size:14px;letter-spacing:.08em;
+  cursor:pointer;margin-top:24px;
+  transition:border-color .2s,box-shadow .2s
+}
+.btn:hover{border-color:var(--cyan);box-shadow:0 0 16px rgba(79,215,215,.15)}
+.btn:active{background:rgba(79,215,215,.1)}
+
+.btn.secondary{
+  background:transparent;border-color:rgba(122,140,140,.3);color:var(--muted)
+}
+.btn.secondary:hover{border-color:var(--muted);box-shadow:0 0 12px rgba(122,140,140,.1);color:var(--text)}
+
+/* === PROGRESS BAR (terminal style) === */
+.progress{
+  height:3px;background:var(--panel2);
+  margin:20px 0 28px;overflow:hidden
+}
+.bar{
+  height:100%;width:0;
+  background:linear-gradient(90deg,var(--cyan),var(--cyan-bright));
+  box-shadow:0 0 8px rgba(79,215,215,.5);
+  transition:width .3s
+}
+
+/* === QUIZ TOP BAR === */
+.qtop{
+  display:flex;justify-content:space-between;gap:12px;
+  font-family:"Aldrich","SF Mono",monospace;
+  color:var(--cyan);font-size:13px;letter-spacing:.05em
+}
+.qtop span:last-child{color:var(--muted)}
+
+/* question: system sans-serif */
+.q{
+  font-family:"Noto Sans SC","Source Han Sans SC","PingFang SC",sans-serif;
+  font-size:23px;margin:16px 0 20px;color:var(--text);font-weight:500
+}
+
+/* === OPTIONS === */
+.opts{display:grid;gap:10px}
+
+/* option: system sans-serif */
+.opt{
+  width:100%;text-align:left;
+  background:var(--panel2);border:1px solid rgba(79,215,215,.08);
+  padding:16px 20px;cursor:pointer;
+  font-family:"Noto Sans SC","Source Han Sans SC","PingFang SC",sans-serif;
+  font-size:16px;color:var(--text);
+  transition:border-color .15s,background .15s
+}
+.opt:hover{
+  border-color:var(--cyan);background:rgba(79,215,215,.05)
+}
+
+/* === RESULT === */
+.result{
+  display:grid;grid-template-columns:minmax(200px,300px) 1fr;
+  gap:30px;align-items:start
+}
+
+/* portrait card */
+.portrait{
+  width:100%;aspect-ratio:3/4;object-fit:cover;
+  border:1px solid rgba(79,215,215,.2);
+  background:var(--panel2);
+  box-shadow:0 0 30px rgba(79,215,215,.06)
+}
+
+/* result name: Aldrich / cyan-bright glow */
+.name{
+  font-family:"Aldrich","SF Mono",monospace;
+  font-size:44px;line-height:1.05;margin:0;font-weight:900;
+  color:var(--cyan-bright);
+  text-shadow:0 0 30px rgba(154,251,255,.25)
+}
+
+/* result meta: 终端数据 — Aldrich / red */
+.meta{
+  font-family:"Aldrich","SF Mono",monospace;
+  color:var(--red);font-weight:400;letter-spacing:.06em;
+  margin:8px 0 12px;font-size:14px
+}
+
+/* description: system sans-serif */
+.desc{
+  font-family:"Noto Sans SC","Source Han Sans SC","PingFang SC",sans-serif;
+  font-size:17px;color:var(--text);line-height:1.7
+}
+
+/* === TAGS === */
+.pillrow{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+
+/* tag: 终端数据 — Aldrich / cyan on dark */
+.pill{
+  font-family:"Aldrich","SF Mono",monospace;
+  border:1px solid rgba(79,215,215,.25);
+  padding:4px 12px;color:var(--cyan);font-size:12px;
+  letter-spacing:.04em;background:rgba(79,215,215,.04)
+}
+
+/* === SCORES (terminal output) === */
+.scores{
+  margin-top:20px;border-top:1px solid rgba(79,215,215,.1);
+  padding-top:18px;
+  font-family:"Aldrich","SF Mono",monospace;
+  color:var(--muted);font-size:13px;letter-spacing:.03em
+}
+
+/* === ERROR === */
+.err{
+  white-space:pre-wrap;background:rgba(196,0,0,.08);
+  border:1px solid rgba(196,0,0,.3);padding:14px;
+  color:var(--red);margin-top:16px;display:none;
+  font-family:"SF Mono","Menlo",monospace;font-size:13px
+}
+
+.hidden{display:none}
+
+/* === MOBILE === */
+@media(max-width:760px){
+  .result{grid-template-columns:1fr}
+  .hero{padding:40px 16px}
+  .card{padding:20px}
+  .name{font-size:34px}.q{font-size:20px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section id="cover" class="card hero">
+  <div class="eyebrow">historical style matcher</div>
+  <h1 class="title">Fa<span class="em">Scis</span>Ti Quiz</h1>
+  <button class="btn" id="startBtn" type="button">开始测试</button>
+  <div id="err" class="err"></div>
+</section>
+<section id="quiz" class="card hidden">
+  <div class="qtop"><span id="step"></span><span>选择最接近的一项</span></div>
+  <div class="progress"><div class="bar" id="bar"></div></div>
+  <h2 class="q" id="qText"></h2>
+  <div class="opts" id="opts"></div>
+</section>
+<section id="result" class="card hidden">
+  <div class="result">
+    <img class="portrait" id="rImg" alt="">
+    <div>
+      <div class="eyebrow">匹配结果</div>
+      <h2 class="name" id="rName"></h2>
+      <div class="meta" id="rMeta"></div>
+      <p class="desc" id="rDesc"></p>
+      <div class="pillrow" id="rTags"></div>
+      <div class="scores" id="rScores"></div>
+      <button class="btn" id="againBtn" type="button">重新测试</button>
+      <button class="btn secondary" id="copyBtn" type="button">复制结果</button>
+    </div>
+  </div>
+</section>
+</div>
+<script>
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const IMAGES = {
+  mussolini:'asset/mussolini.jpg',
+  dannunzio:'asset/dannunzio.jpg',
+  marinetti:'asset/marinetti.jpg',
+  nietzsche:'asset/nietzsche.jpg',
+  spengler:'asset/spengler.jpg',
+  schmitt:'asset/schmitt.jpg',
+  evola:'asset/evola.jpg',
+  franco:'asset/franco.jpg',
+  joseantonio:'asset/joseantonio.jpg',
+  himmler:'asset/himmler.jpg',
+  codreanu:'asset/codreanu.jpg',
+  ishiwara:'asset/ishiwara.jpg',
+  itagaki:'asset/itagaki.jpg',
+  kita:'asset/kita.jpg',
+  okawa:'asset/okawa.jpg',
+  daijitao:'asset/daijitao.jpg',
+  hezhonghan:'asset/hezhonghan.jpg',
+  liujianqun:'asset/liujianqun.jpg',
+  kangze:'asset/kangze.jpg',
+  daili:'asset/daili.jpg',
+  chenlifu:'asset/chenlifu.jpg',
+  kangsheng:'asset/kangsheng.jpg',
+  mishima:'asset/mishima.jpg',
+  pound:'asset/pound.jpg',
+  sorel:'asset/sorel.jpg',
+  valois:'asset/valois.jpg',
+  gregor:'asset/gregor.jpg',
+  otto:'asset/otto.jpg',
+  niekisch:'asset/niekisch.jpg',
+  yockey:'asset/yockey.jpg',
+  limonov:'asset/limonov.jpg',
+  dugin:'asset/dugin.jpg',
+  letov:'asset/letov.jpg',
+  jordan:'asset/jordan.jpg',
+  teichmuller:'asset/teichmuller.jpg'
+};
+const C = [
+ c('mussolini','贝尼托·墨索里尼','报纸 · 账本 · 舞台',['传播','机会判断','组织'],{newspaper:3,money:3,perform:2,org:2,prag:2},'倾向于将想法转化为刊物、账号、预算和对外口径。相比纯理论，更关心一件事如何被传播和推进。'),
+ c('dannunzio','加布里埃莱·邓南遮','审美 · 仪式 · 飞行',['形式感','诗性','公共呈现'],{aesth:3,ritual:3,perform:3,air:2,poetry:2},'重视形式、气氛和整体观感。即使资源有限，也追求活动呈现的完整性和仪式感。'),
+ c('marinetti','马里内蒂','速度 · 排版 · 未来主义',['动态视觉','速度感','反传统'],{speed:3,noise:2,futur:3,aesth:2,trad:-2},'偏好强烈、动态、带速度感的表达。文本和视觉倾向于打破稳定、工整、传统的框架。'),
+ c('nietzsche','尼采','谱系 · 价值 · 独行',['价值重估','风格','孤独'],{brain:3,island:2,text:2,aesth:1,order:-1},'倾向于将争论追溯到价值来源和心理结构，而非停留在表面的是非判断。'),
+ c('spengler','斯宾格勒','文明 · 周期 · 黄昏',['历史周期','文明论','宏观'],{civilization:3,doom:3,book:2,brain:2,map:1},'倾向于将日常变化纳入更大的历史周期框架中理解，对短期修补的耐心有限。'),
+ c('schmitt','卡尔·施米特','法学 · 例外 · 决断',['最终解释权','制度边界','冷判断'],{law:3,decision:3,ice:2,order:2},'在意见混乱时，首先关注最终解释权的归属，以及边界的划定者。'),
+ c('evola','埃沃拉','传统 · 山 · 秘教',['反现代','冷传统','书斋'],{trad:3,mystic:3,island:2,ice:2,org:-1},'不急于参与热闹的组织活动，更倾向于追溯传统、来源和精神层级。'),
+ c('franco','弗朗哥','秩序 · 稳定 · 守成',['保守','治理','耐心'],{order:3,ice:2,admin:2,trad:2,perform:-1},'倾向于压低波动、维持结构、等待对手犯错。不迷恋表达，重视可持续的控制。'),
+ c('joseantonio','何塞·安东尼奥','青年 · 演说 · 贵族气',['青年','表达','体面'],{youth:2,speech:3,aesth:2,law:1,org:1},'重视表达的清洁度与精神姿态，倾向于将组织问题先转化为一套体面的语言。'),
+ c('himmler','希姆莱','档案 · 谱系 · 组织仪式',['档案','层级','固定规则'],{archive:3,mystic:2,order:3,ritual:2,org:2},'整理资料时自然形成层级、编号、符号和固定归档规则。'),
+ c('codreanu','科德里亚努','青年 · 宗教感 · 小组承诺',['纪律','共同体','承诺'],{youth:3,ritual:2,religion:2,group:2,doom:1},'关注小组织内部的承诺、纪律和共同体密度，不满足于松散合作。'),
+ c('ishiwara','石原莞尔','地图 · 战略 · 终局',['战略','地缘','大局'],{map:3,strategy:3,religion:1,hand:2,mystic:1},'对待地图的方式不是导航导向，而是为了理解眼前事务通向怎样的长期结构。'),
+ c('itagaki','板垣征四郎','军务 · 执行 · 现场',['军略','执行','组织'],{hand:3,org:2,strategy:2,ice:1,admin:1},'倾向于将复杂判断落实到具体执行链上，不满足于停留在解释层面。'),
+ c('kita','北一辉','蓝图 · 改造 · 青年',['纲领','理论','改革'],{theory:3,youth:2,text:2,volc:2,org:1},'倾向于将分散的不满整理成系统蓝图，给分散情绪赋予明确结构。'),
+ c('okawa','大川周明','泛亚 · 宗教 · 书斋',['泛亚','宗教','知识网络'],{religion:2,book:2,asia:3,brain:2,mystic:1},'倾向于从文明、宗教和区域结构理解政治，而非局限于一时一地的视角。'),
+ c('daijitao','戴季陶','正统解释 · 文本 · 教育',['正统','解释权','文本'],{orthodoxy:3,text:3,pedagogy:2,religion:1,order:2},'重视概念的解释规范性，倾向于主动建立标准读法和解释框架。'),
+ c('hezhonghan','贺衷寒','青年政训 · 纪律 · 干部',['青年','训练','纪律'],{youth:3,org:3,discipline:3,pedagogy:2},'认为组织初期最需要稳定的学习机制、分工体系、纪律和负责人制度。'),
+ c('liujianqun','刘健群','小册子 · 命名 · 组织想象',['小册子','命名','传播'],{newspaper:2,youth:2,org:2,symbol:2,text:2},'不一定站到台前，但擅长将模糊的感觉转化为名称、格式和可传播的文本。'),
+ c('kangze','康泽','训练营 · 基层 · 动员',['训练','筛选','任务'],{training:3,org:3,hand:2,discipline:3},'相比开放讨论，更重视成员筛选、训练和任务分配。'),
+ c('daili','戴笠','暗线 · 信息 · 关系',['影子网络','信息分布','保密'],{shadow:3,archive:2,network:2,ice:2,org:1},'不一定发言最多，但倾向于掌握关系、渠道和信息分布。'),
+ c('chenlifu','陈立夫','党务 · 人事 · 教育系统',['行政','人事','网络'],{admin:3,org:3,network:3,archive:1,order:2},'关注报名流程、名单管理、审批节点和培训体系，以及组织如何分层运转。'),
+ c('kangsheng','康生','异轨彩蛋 · 档案 · 暗线',['档案','暗线','稳定性'],{archive:3,shadow:3,loyalty:2,ice:2},'进入新组织时，优先观察人员稳定性、信息流向和实际执行能力。'),
+ c('mishima','三岛由纪夫','文学 · 身体 · 自我要求',['身体管理','文学','形式'],{body:3,aesth:2,ritual:2,doom:2,island:1},'倾向于将写作、身体管理和个人形象纳入同一套自我要求体系。'),
+ c('pound','埃兹拉·庞德','诗 · 货币 · 碎片',['文学','经济','引用'],{literature:3,money:2,fragment:3,archive:2,book:2},'倾向于将文学、经济和文明问题纳入同一套解释框架。'),
+ c('sorel','乔治·索雷尔','神话 · 工团 · 行动',['共享叙事','行动理论','工团'],{myth:3,strike:3,theory:2,labor:2,law:-2},'关注一种叙事能否转化为持续行动，而非仅停留在政策细节层面。'),
+ c('valois','乔治·瓦卢瓦','工团 · 刊物 · 组织创业',['工团','组织草案','刊物'],{syndical:3,newspaper:2,org:2,labor:2,failure:1},'擅长将散乱的不满转化为组织草案、刊物和基本立场。'),
+ c('gregor','格雷戈尔·施特拉塞','基层网络 · 组织机器',['基层','网络','反资本'],{org:3,labor:2,antiCapital:2,network:3,prag:2},'倾向于在既有组织内部经营基层、人事和地方网络。'),
+ c('otto','奥托·施特拉塞','分裂 · 小册子 · 路线洁癖',['分歧','出走','小册子'],{antiCapital:3,pamphlet:3,split:3,exile:2,newspaper:2},'对路线变化高度敏感，倾向于另写文本、重申分歧并重新组织。'),
+ c('niekisch','恩斯特·尼基施','民族布尔什维克 · 反西方',['冷书斋','反西方','地图'],{nationalBolshevik:3,antiWest:3,book:2,doom:2,map:2,ice:2},'对自由主义、资产阶级和西方现代性持有冷静的怀疑态度。'),
+ c('yockey','Francis Parker Yockey','战后地下 · 斯宾格勒二创',['厚书','流亡','地下'],{spengler:3,underground:2,exile:2,book:3,doom:3},'偏好阅读门槛高、但能提供完整世界观的理论文本。'),
+ c('limonov','爱德华·利莫诺夫','地下小报 · 流亡 · 自传',['地下','小报','流亡'],{underground:3,newspaper:3,exile:3,literature:3,order:-2},'更关注边缘共同体、非正式网络和强烈的自我叙事。'),
+ c('dugin','亚历山大·杜金','欧亚 · 地图 · 神秘地缘',['地缘','欧亚','黑色书斋'],{map:3,eurasia:3,mystic:3,book:2,antiLiberal:2},'倾向于从地理空间、长期结构和文明边界的角度理解政治变化。'),
+ c('letov','叶戈尔·列托夫','噪音 · 朋克 · 反政治',['地下音乐','立场审美','孤岛'],{noise:3,punk:3,underground:2,island:2,law:-3},'不倾向于直接表态，但审美选择本身带有很强的立场感。'),
+ c('jordan','Pascual Jordan','量子 · 随机 · 反唯物',['物理','随机','书斋'],{physics:3,random:3,brain:3,antiMatter:2,shadow:1},'倾向于将世界拆解为概率、结构和可观测量，而非粗糙地谈论物质与观念。'),
+ c('teichmuller','Oswald Teichmüller','数学 · 形变 · 地图',['数学','映射','冷感'],{math:3,map:2,ice:2,form:3,perform:-2},'对待地图的方式不是关注距离，而是关注结构在变形中如何保持。')
+];
+function c(id,name,meta,tags,v,desc){return {id,name,meta,tags,v,desc};}
+const Q = [
+ q('关于“群众”这一概念：', a('它需要某种共享叙事，否则很难形成持续行动',{myth:1,strike:1,sorel:1}), a('它首先依赖基层网络、地方节点和长期组织',{org:1,network:1,gregor:1}), a('它需要稳定训练和分工，否则热情难以维持',{discipline:1,youth:1,kangze:1}), a('相比宏大概念，更应关注小范围共同体的实际连接',{underground:1,exile:1,limonov:1})),
+ q('创办一个新刊物时，最重要的是：', a('刊名要有识别度，最好能让人一眼记住',{newspaper:1,symbol:1,liujianqun:1}), a('第一期要先说明自己的分歧和基本立场',{split:1,pamphlet:1,otto:1}), a('不必追求大众化，但要有清楚的理论密度',{book:1,spengler:1,yockey:1}), a('文本不应只停留在表达，还要影响人的判断和行动',{myth:1,strike:1,sorel:1})),
+ q('更适应哪种工作环境：', a('非正式、低成本，但信息流动很快的小圈子',{underground:1,newspaper:1,limonov:1}), a('需要地图、结构图或白板来帮助讨论',{map:1,eurasia:1,dugin:1}), a('不依赖固定空间，更看重即时表达和现场反馈',{noise:1,punk:1,letov:1}), a('安静、封闭，适合长时间处理复杂文本',{book:1,spengler:1,yockey:1})),
+ q('组织刚起步时，最先需要处理：', a('名称、标识、口径和传播形式',{symbol:1,newspaper:1,liujianqun:1}), a('学习、分工、纪律和负责人机制',{youth:1,org:1,discipline:1,hezhonghan:1}), a('成员筛选、训练和任务分配',{training:1,org:1,kangze:1}), a('名单、渠道、信息流向和实际执行能力',{archive:1,shadow:1,daili:1,kangsheng:1})),
+ q('面对混乱争论，更值得关注的是：', a('谁有权宣布讨论到此为止',{law:1,decision:1,schmitt:1}), a('怎样写成章程、分工和流程',{law:1,admin:1,order:1}), a('怎样整理成标准解释文本',{orthodoxy:1,text:1,daijitao:1}), a('谁掌握人事、审批和培训节点',{admin:1,network:1,chenlifu:1})),
+ q('对地图的直觉反应更接近：', a('地理空间会塑造长期政治结构',{map:1,eurasia:1,dugin:1}), a('眼前事务最终会通向一个更大的战略终局',{map:1,strategy:1,ishiwara:1}), a('文明会在空间中演化、迁徙和衰退',{civilization:1,map:1,spengler:1}), a('结构本身如何变形比距离更重要',{math:1,map:1,teichmuller:1})),
+ q('更容易被哪种文本吸引：', a('阅读门槛高，但能重塑问题框架的厚书',{book:1,spengler:1,yockey:1}), a('短小、尖锐、立场很清楚的小册子',{pamphlet:1,split:1,otto:1}), a('文学、经济和文明问题互相缠绕的文本',{literature:1,money:1,pound:1}), a('形式粗糙但表达密度很高的地下刊物',{underground:1,noise:1,letov:1})),
+ q('在资源有限的条件下，仍应重视：', a('活动的形式、秩序和整体观感',{aesth:1,perform:1,ritual:1,dannunzio:1}), a('视觉上的速度感和动态冲击',{futur:1,aesth:1,speed:1,marinetti:1}), a('身体管理、写作和个人形象的一致性',{body:1,ritual:1,mishima:1}), a('传播口径、预算和外部可见度',{newspaper:1,money:1,mussolini:1})),
+ q('整理资料时更自然出现：', a('层级、编号、符号和固定归档规则',{archive:1,mystic:1,order:1,himmler:1}), a('观念、传统和来源的追溯',{trad:1,mystic:1,evola:1}), a('关系、渠道和信息分布',{shadow:1,archive:1,daili:1}), a('概率、变量和可观测结构',{physics:1,random:1,jordan:1})),
+ q('一个组织最不可接受的变质方式是：', a('路线变味却假装没有变化',{split:1,pamphlet:1,otto:1}), a('只有会写长文的人，没有基层网络',{org:1,network:1,gregor:1}), a('太松散，没有训练和任务机制',{discipline:1,training:1,kangze:1}), a('太体面，丧失边缘经验和识别度',{underground:1,newspaper:1,limonov:1})),
+ q('对现代性的理解更倾向于：', a('它打断了传统层级与精神秩序',{trad:1,mystic:1,evola:1}), a('它带来速度、机器和新的视觉语法',{speed:1,futur:1,marinetti:1}), a('它进入文明周期中的晚期阶段',{civilization:1,doom:1,spengler:1}), a('它需要从法律和决断结构上重新理解',{law:1,decision:1,schmitt:1})),
+ q('关于“青年组织”，更接近的观点是：', a('先建立学习、纪律和干部机制',{youth:1,discipline:1,hezhonghan:1}), a('先确定名称、标识、口径和刊物',{symbol:1,youth:1,liujianqun:1}), a('需要稳定训练和基层任务',{training:1,youth:1,kangze:1}), a('需要更强的小组承诺与共同体密度',{ritual:1,religion:1,codreanu:1})),
+ q('处理问题时更擅长将其转化为：', a('传播计划、预算和对外账号',{newspaper:1,money:1,mussolini:1}), a('战略图、路径和长期节点',{map:1,strategy:1,ishiwara:1}), a('标准解释文本和教育材料',{text:1,pedagogy:1,daijitao:1}), a('人事结构、审批链和组织网络',{admin:1,network:1,chenlifu:1})),
+ q('对“左/右”标签的态度：', a('更关心反资本和工团式组织问题',{antiCapital:1,syndical:1,valois:1}), a('更关心民族形式与反西方现代性的结合',{nationalBolshevik:1,antiWest:1,niekisch:1}), a('更关心地图、文明和欧亚结构',{eurasia:1,map:1,dugin:1}), a('更关心地下表达和审美立场',{underground:1,punk:1,letov:1})),
+ q('以下哪种描述最接近判断方式：', a('把混乱现实压成可执行的组织流程',{org:1,admin:1,hand:1}), a('把细节放入文明周期和长期结构',{civilization:1,doom:1,book:1}), a('把文本、符号和形式统一成完整表达',{aesth:1,text:1,perform:1}), a('把信息、关系和风险先归档再行动',{archive:1,shadow:1,ice:1}))
+];
+function q(text,...opts){return {q:text,o:opts};}
+function a(text,tags){return {text,tags};}
+let idx = 0;
+let score = Object.create(null);
+function add(tags){for(const [k,v] of Object.entries(tags)) score[k] = (score[k] || 0) + v;}
+function sim(ch){let s=0; for(const [k,v] of Object.entries(ch.v)) s += (score[k] || 0) * v; s += (score[ch.id] || 0) * 4; return s;}
+function pick(){
+  const ranked = C.map(ch => ({ch, s: sim(ch)})).sort((x,y)=>y.s-x.s);
+  const raw = score;
+  const eggs = [
+    ['jordan', raw.physics>=2 && raw.random>=1],
+    ['teichmuller', raw.math>=1 && raw.map>=2],
+    ['kangsheng', raw.archive>=2 && raw.shadow>=2],
+    ['yockey', raw.spengler>=2 && raw.book>=2],
+    ['limonov', raw.underground>=2 && raw.newspaper>=1],
+    ['dugin', raw.map>=2 && raw.eurasia>=1 && raw.mystic>=1],
+    ['letov', raw.noise>=1 && raw.punk>=1]
+  ];
+  for(const [id,on] of eggs){ if(on){ const ch = C.find(x=>x.id===id); if(ch) return {ch, ranked}; }}
+  return {ch: ranked[0].ch, ranked};
+}
+function renderQ(){
+  const item = Q[idx];
+  $('step').textContent = `${idx+1} / ${Q.length}`;
+  $('bar').style.width = `${idx / Q.length * 100}%`;
+  $('qText').textContent = item.q;
+  const box = $('opts'); box.innerHTML = '';
+  item.o.forEach(opt => {
+    const b = document.createElement('button');
+    b.className = 'opt'; b.type = 'button'; b.textContent = opt.text;
+    b.addEventListener('click', () => { add(opt.tags); idx++; idx < Q.length ? renderQ() : showResult(); });
+    box.appendChild(b);
+  });
+}
+function showResult(){
+  $('quiz').classList.add('hidden'); $('result').classList.remove('hidden'); $('bar').style.width = '100%';
+  const {ch, ranked} = pick();
+  $('rName').textContent = ch.name; $('rMeta').textContent = ch.meta; $('rDesc').textContent = ch.desc;
+  const img = $('rImg'); img.style.display = 'block'; img.src = IMAGES[ch.id] || ''; img.alt = ch.name; img.onerror = () => { img.style.display = 'none'; };
+  const tags = $('rTags'); tags.innerHTML = ''; ch.tags.forEach(t => { const p = document.createElement('span'); p.className = 'pill'; p.textContent = t; tags.appendChild(p); });
+  $('rScores').textContent = '候选前五：' + ranked.slice(0,5).map(x => `${x.ch.name} ${Math.round(x.s)}`).join(' · ');
+}
+function reset(){idx=0; score=Object.create(null); $('result').classList.add('hidden'); $('quiz').classList.remove('hidden'); renderQ();}
+function boot(){
+  $('startBtn').addEventListener('click', () => { $('cover').classList.add('hidden'); $('quiz').classList.remove('hidden'); renderQ(); });
+  $('againBtn').addEventListener('click', reset);
+  $('copyBtn').addEventListener('click', async () => { const t = `${$('rName').textContent}｜${$('rMeta').textContent}`; try{ await navigator.clipboard.writeText(t); $('copyBtn').textContent='已复制'; } catch(e){ alert(t); } });
+}
+try { boot(); } catch (e) { $('err').style.display='block'; $('err').textContent = e.stack || String(e); }
+})();
+</script>
+</body>
+</html>

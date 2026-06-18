@@ -8,7 +8,7 @@ test.describe('Fascisti Quiz', () => {
   test('cover page loads and shows start button', async ({ page }) => {
     await page.goto(URL);
     await expect(page.locator('#startBtn')).toBeVisible();
-    await expect(page.locator('.title')).toHaveText('Fascisti Quiz');
+    await expect(page.locator('.title')).toHaveText('FaScisTi Quiz');
     // These texts should NOT be present
     await expect(page.locator('.subtitle')).not.toBeVisible();
     await expect(page.locator('.foot')).not.toBeVisible();
