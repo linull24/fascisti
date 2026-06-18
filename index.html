@@ -217,6 +217,22 @@ body::after{
 
 .hidden{display:none}
 
+
+/* === CHEATSHEET === */
+.cheatsheet-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.cheatsheet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;max-height:70vh;overflow-y:auto;padding-right:8px}
+.cheatsheet-grid::-webkit-scrollbar{width:4px}
+.cheatsheet-grid::-webkit-scrollbar-thumb{background:rgba(79,215,215,.15)}
+.cheat-card{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start;background:var(--panel2);border:1px solid rgba(79,215,215,.08);padding:14px}
+.cheat-card .thumb{width:64px;height:85px;object-fit:cover;border:1px solid rgba(79,215,215,.15);background:var(--panel)}
+.cheat-card .info{min-width:0}
+.cheat-name{font-family:"文瀚建筑体","Noto Serif SC","Songti SC",serif;font-size:16px;color:var(--cyan-bright);line-height:1.2;margin:0 0 2px}
+.cheat-meta{font-family:"Aldrich","SF Mono",monospace;font-size:11px;color:var(--muted);letter-spacing:.03em;margin:0 0 8px}
+.cheat-path{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px}
+.cheat-path span{font-family:"Aldrich","SF Mono",monospace;font-size:10px;padding:2px 5px;color:var(--muted);border:1px solid rgba(122,140,140,.2);background:rgba(122,140,140,.04);letter-spacing:.04em}
+.cheat-jump{font-family:"Aldrich","SF Mono",monospace;font-size:11px;background:transparent;border:1px solid rgba(79,215,215,.2);color:var(--cyan);padding:4px 10px;cursor:pointer;letter-spacing:.04em;transition:border-color .15s,background .15s}
+.cheat-jump:hover{border-color:var(--cyan);background:rgba(79,215,215,.08)}
+
 /* === MOBILE === */
 @media(max-width:760px){
   .result{grid-template-columns:1fr}
@@ -232,6 +248,7 @@ body::after{
   <div class="eyebrow">historical style matcher</div>
   <h1 class="title">Fa<span class="em">Scis</span>Ti Quiz</h1>
   <button class="btn" id="startBtn" type="button">开始测试</button>
+	  <button class="btn secondary" id="cheatBtn" type="button">查看人物表</button>
   <div id="err" class="err"></div>
 </section>
 <section id="quiz" class="card hidden">
@@ -240,7 +257,14 @@ body::after{
   <h2 class="q" id="qText"></h2>
   <div class="opts" id="opts"></div>
 </section>
-<section id="result" class="card hidden">
+	<section id="cheatsheet" class="card hidden">
+	  <div class="cheatsheet-top">
+	    <div class="eyebrow">人物速查表 · 35 CHARACTERS</div>
+	    <button class="btn secondary" id="cheatCloseBtn" type="button">关闭</button>
+	  </div>
+	  <div class="cheatsheet-grid" id="cheatsheetGrid"></div>
+	</section>
+	<section id="result" class="card hidden">
   <div class="result">
     <img class="portrait" id="rImg" alt="">
     <div>
@@ -252,6 +276,7 @@ body::after{
       <div class="scores" id="rScores"></div>
       <button class="btn" id="againBtn" type="button">重新测试</button>
       <button class="btn secondary" id="copyBtn" type="button">复制结果</button>
+	      <button class="btn secondary" id="cheatBtn2" type="button">查看人物表</button>
     </div>
   </div>
 </section>
@@ -362,6 +387,12 @@ function scaled(k,v){return v/Math.sqrt(exposure[k]||1)}
 function add(tags){for(const[k,v]of Object.entries(tags))score[k]=(score[k]||0)+v}
 function sim(ch){let dot=0,norm=0;for(const[k,v]of Object.entries(ch.v||{})){const cv=scaled(k,v),sv=scaled(k,score[k]||0);dot+=sv*cv;norm+=cv*cv}let s=norm?dot/Math.sqrt(norm):0;if(score[ch.id])s+=6*scaled(ch.id,score[ch.id]);return s}
 function pick(){const ranked=C.map(ch=>({ch,s:sim(ch)})).sort((x,y)=>y.s-x.s);return{ch:ranked[0].ch,ranked}}
+// ── Cheatsheet helpers ──────────────────────────────────────────────────
+	function simTrial(ch,sc){let dot=0,norm=0;for(const[k,v]of Object.entries(ch.v||{})){const cv=scaled(k,v),sv=scaled(k,sc[k]||0);dot+=sv*cv;norm+=cv*cv}let s=norm?dot/Math.sqrt(norm):0;if(sc[ch.id])s+=6*scaled(ch.id,sc[ch.id]);return s}
+	function findPath(target){const sc=Object.create(null);const path=[];for(let i=0;i<Q.length;i++){const q=Q[i];let best=null,bestDiff=-Infinity;for(let oi=0;oi<q.o.length;oi++){const opt=q.o[oi];const trial=Object.create(null);for(const[k,v]of Object.entries(sc))trial[k]=v;for(const[k,v]of Object.entries(opt.tags))trial[k]=(trial[k]||0)+v;const targetS=simTrial(target,trial);const maxComp=Math.max(...C.filter(c=>c.id!==target.id).map(c=>simTrial(c,trial)));if(targetS-maxComp>bestDiff){bestDiff=targetS-maxComp;best={opt,oi}}}if(!best)return null;path.push(best);for(const[k,v]of Object.entries(best.opt.tags))sc[k]=(sc[k]||0)+v}return{path,score:sc}}
+	function jumpToChar(ch){const r=findPath(ch);if(!r)return;score=r.score;idx=Q.length;$('cheatsheet').classList.add('hidden');$('cover').classList.add('hidden');$('quiz').classList.add('hidden');showResult()}
+	let cheatFrom=null;
+	function buildCheatsheet(){const grid=$('cheatsheetGrid');if(grid.children.length)return;C.forEach(ch=>{const r=findPath(ch);const card=document.createElement('div');card.className='cheat-card';const thumb=document.createElement('img');thumb.className='thumb';thumb.src=IMAGES[ch.id]||'';thumb.alt=ch.name;thumb.loading='lazy';thumb.onerror=()=>{thumb.style.display='none'};const info=document.createElement('div');info.className='info';const nm=document.createElement('div');nm.className='cheat-name';nm.textContent=ch.name;const mt=document.createElement('div');mt.className='cheat-meta';mt.textContent=ch.meta;const pd=document.createElement('div');pd.className='cheat-path';if(r)r.path.forEach((p,i)=>{const sp=document.createElement('span');sp.textContent=`${i+1}${"ABCD"[p.oi]}`;pd.appendChild(sp)});const jump=document.createElement('button');jump.className='cheat-jump';jump.textContent='跳转至结果';jump.addEventListener('click',()=>jumpToChar(ch));info.appendChild(nm);info.appendChild(mt);info.appendChild(pd);info.appendChild(jump);card.appendChild(thumb);card.appendChild(info);grid.appendChild(card)})}
 function renderQ(){
   const item = Q[idx];
   $('step').textContent = `${idx+1} / ${Q.length}`;
@@ -388,6 +419,9 @@ function boot(){exposure=buildExposure(Q);
   $('startBtn').addEventListener('click', () => { $('cover').classList.add('hidden'); $('quiz').classList.remove('hidden'); renderQ(); });
   $('againBtn').addEventListener('click', reset);
   $('copyBtn').addEventListener('click', async () => { const t = `${$('rName').textContent}｜${$('rMeta').textContent}`; try{ await navigator.clipboard.writeText(t); $('copyBtn').textContent='已复制'; } catch(e){ alert(t); } });
+	  $('cheatBtn').addEventListener('click', () => { cheatFrom='cover'; buildCheatsheet(); $('cover').classList.add('hidden'); $('cheatsheet').classList.remove('hidden'); });
+	  $('cheatBtn2').addEventListener('click', () => { cheatFrom='result'; buildCheatsheet(); $('result').classList.add('hidden'); $('cheatsheet').classList.remove('hidden'); });
+	  $('cheatCloseBtn').addEventListener('click', () => { $('cheatsheet').classList.add('hidden'); if(cheatFrom==='result')$('result').classList.remove('hidden');else $('cover').classList.remove('hidden'); });
 }
 try { boot(); } catch (e) { $('err').style.display='block'; $('err').textContent = e.stack || String(e); }
 })();
